@@ -3,6 +3,6 @@ import { createBrowserRouter } from "react-router";
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <div>Enter</div>,
+    element: <div className="">Enter</div>,
   },
 ]);
