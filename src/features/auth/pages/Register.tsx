@@ -1,4 +1,29 @@
+import { useAuth } from "../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema, type RegisterSchemaType } from "../utils/zodSchema";
 const Register = () => {
+  const { handleRegister } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+    defaultValues: { username: "", email: "", password: "" },
+  });
+
+  const handleSubmitForm = async (data: RegisterSchemaType) => {
+    const res = await handleRegister(data);
+    try {
+      console.log(res);
+    } catch (error) {}
+
+    handleRegister(data);
+    console.log(data);
+  };
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#07111f] px-4">
       {/* Background Effects */}
@@ -23,7 +48,7 @@ const Register = () => {
           </div>
 
           {/* Form */}
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit(handleSubmitForm)}>
             {/* Username */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-300">
@@ -31,10 +56,12 @@ const Register = () => {
               </label>
 
               <input
+                {...register("username")}
                 type="text"
                 placeholder="@username"
                 className="w-full rounded-2xl border border-white/10 bg-[#132238] px-4 py-3 text-white transition-all duration-300 outline-none placeholder:text-gray-500 focus:border-blue-400/40 focus:bg-[#17283f]"
               />
+              <p>{errors.username?.message}</p>
             </div>
 
             {/* Email */}
@@ -44,10 +71,12 @@ const Register = () => {
               </label>
 
               <input
+                {...register("email")}
                 type="email"
                 placeholder="Enter your email"
                 className="w-full rounded-2xl border border-white/10 bg-[#132238] px-4 py-3 text-white transition-all duration-300 outline-none placeholder:text-gray-500 focus:border-blue-400/40 focus:bg-[#17283f]"
               />
+              <p>{errors.email?.message}</p>
             </div>
 
             {/* Password */}
@@ -57,10 +86,12 @@ const Register = () => {
               </label>
 
               <input
+                {...register("password")}
                 type="password"
                 placeholder="Create password"
                 className="w-full rounded-2xl border border-white/10 bg-[#132238] px-4 py-3 text-white transition-all duration-300 outline-none placeholder:text-gray-500 focus:border-blue-400/40 focus:bg-[#17283f]"
               />
+              <p>{errors.password?.message}</p>
             </div>
 
             {/* Register Button */}
