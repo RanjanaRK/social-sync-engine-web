@@ -10,6 +10,9 @@ export const useAuth = () => {
     const response = await register(rData);
 
     dispatch(setUser(response.user));
+
+    // console.log(dispatch(setUser(response.user)));
+
     return response;
   };
 

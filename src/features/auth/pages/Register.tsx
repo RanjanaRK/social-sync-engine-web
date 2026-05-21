@@ -1,6 +1,8 @@
-import { useAuth } from "../hooks/useAuth";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { useAuth } from "../hooks/useAuth";
 import { registerSchema, type RegisterSchemaType } from "../utils/zodSchema";
 const Register = () => {
   const { handleRegister } = useAuth();
@@ -15,13 +17,15 @@ const Register = () => {
   });
 
   const handleSubmitForm = async (data: RegisterSchemaType) => {
-    const res = await handleRegister(data);
     try {
-      console.log(res);
-    } catch (error) {}
+      const res = await handleRegister(data);
 
-    handleRegister(data);
-    console.log(data);
+      toast.success(res.message);
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
+    }
   };
 
   return (
