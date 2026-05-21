@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useAuth } from "../hooks/useAuth";
 import { registerSchema, type RegisterSchemaType } from "../utils/zodSchema";
+import { Link, useNavigate } from "react-router";
 const Register = () => {
   const { handleRegister } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -21,6 +23,8 @@ const Register = () => {
       const res = await handleRegister(data);
 
       toast.success(res.message);
+
+      navigate("/");
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.message);
@@ -110,9 +114,12 @@ const Register = () => {
           {/* Footer */}
           <p className="mt-7 text-center text-sm text-gray-400">
             Already have an account?{" "}
-            <span className="cursor-pointer text-blue-700 transition hover:text-blue-500">
+            <Link
+              to={"/login"}
+              className="cursor-pointer text-blue-700 transition hover:text-blue-500"
+            >
               Login
-            </span>
+            </Link>
           </p>
         </div>
       </div>

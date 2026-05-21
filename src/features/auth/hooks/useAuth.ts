@@ -1,6 +1,6 @@
-import { register } from "../service/auth.api";
+import { login, register } from "../service/auth.api";
 import { setUser } from "../state/auth.slice";
-import type { RegisterSchemaType } from "../utils/zodSchema";
+import type { LoginSchemaType, RegisterSchemaType } from "../utils/zodSchema";
 import { useDispatch } from "react-redux";
 
 export const useAuth = () => {
@@ -16,5 +16,15 @@ export const useAuth = () => {
     return response;
   };
 
-  return { handleRegister };
+  const handleLogin = async (lData: LoginSchemaType) => {
+    const response = await login(lData);
+
+    dispatch(setUser(response.user));
+
+    // console.log(dispatch(setUser(response.user)));
+
+    return response;
+  };
+
+  return { handleRegister, handleLogin };
 };
