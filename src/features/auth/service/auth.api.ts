@@ -20,3 +20,9 @@ export const login = async (ldata: LoginSchemaType): Promise<AuthResponse> => {
 
   return response.data;
 };
+
+export const logout = async (): Promise<AuthResponse> => {
+  const response = await authApiInstance.post("/logout");
+
+  return response.data;
+};

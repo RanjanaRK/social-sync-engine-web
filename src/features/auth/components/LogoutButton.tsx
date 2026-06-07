@@ -1,6 +1,32 @@
+import { useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "sonner";
+import axios from "axios";
+
 const LogoutButton = () => {
+  const { handleLogout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const res = await handleLogout();
+
+      toast.success(res.message);
+
+      navigate("/login");
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data.message);
+      }
+    }
+  };
+
   return (
-    <button className="group relative overflow-hidden rounded-2xl border border-red-500/20 bg-red-500/10 px-5 py-3 font-semibold text-red-400 transition-all duration-300 hover:border-red-400/40 hover:bg-red-500 hover:text-white hover:shadow-lg hover:shadow-red-500/30">
+    <button
+      onClick={handleSubmit}
+      className="group relative overflow-hidden rounded-2xl border border-red-500/20 bg-red-500/10 px-5 py-3 font-semibold text-red-400 transition-all duration-300 hover:border-red-400/40 hover:bg-red-500 hover:text-white hover:shadow-lg hover:shadow-red-500/30"
+    >
       <span className="relative z-10 flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"

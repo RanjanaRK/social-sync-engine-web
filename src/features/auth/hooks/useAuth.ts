@@ -1,4 +1,4 @@
-import { login, register } from "../service/auth.api";
+import { login, logout, register } from "../service/auth.api";
 import { setUser } from "../state/auth.slice";
 import type { LoginSchemaType, RegisterSchemaType } from "../utils/zodSchema";
 import { useDispatch } from "react-redux";
@@ -26,5 +26,15 @@ export const useAuth = () => {
     return response;
   };
 
-  return { handleRegister, handleLogin };
+  const handleLogout = async () => {
+    const response = await logout();
+
+    dispatch(setUser(null));
+
+    // console.log(dispatch(setUser(response.user)));
+
+    return response;
+  };
+
+  return { handleRegister, handleLogin, handleLogout };
 };

@@ -13,4 +13,13 @@ export const createPostSchema = z.object({
     ),
 });
 
+export const commentSchema = z.object({
+  comment: z
+    .string()
+    .trim()
+    .min(1, "Comment is required")
+    .max(200, "Maximum 200 characters"),
+});
+
 export type CreatePostSchemaType = z.infer<typeof createPostSchema>;
+export type CommentSchemaType = z.infer<typeof commentSchema>;

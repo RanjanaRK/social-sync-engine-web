@@ -5,6 +5,7 @@ import AppLayout from "./AppLayout";
 import CreatePost from "../features/post/pages/CreatePost";
 import Post from "../features/post/pages/Post";
 import Profile from "../features/profile/pages/Profile";
+import PublicProfilePage from "../features/profile/pages/PublicProfilePage";
 
 export const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const routes = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/profile/:userId",
+        element: <PublicProfilePage />,
       },
     ],
   },

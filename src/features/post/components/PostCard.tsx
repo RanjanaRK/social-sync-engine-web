@@ -1,5 +1,6 @@
 import { Heart, MessageCircle } from "lucide-react";
 import PostCarousel from "./PostCarousel";
+import LikeButton from "./LikeButton";
 
 type PostCardProps = {
   username: string;
@@ -40,10 +41,11 @@ const PostCard = ({
         {/* Actions */}
         <div className="p-4">
           <div className="mb-3 flex gap-6">
-            <button className="flex items-center gap-2 text-gray-300 hover:text-red-500">
+            {/* <button className="flex items-center gap-2 text-gray-300 hover:text-red-500">
               <Heart size={22} />
               {likes}
-            </button>
+            </button> */}
+            <LikeButton isLiked={false} likesCount={likes} onLike={() => {}} />
 
             <button className="flex items-center gap-2 text-gray-300 hover:text-blue-400">
               <MessageCircle size={22} />
