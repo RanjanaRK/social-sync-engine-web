@@ -3,6 +3,8 @@ import RegisterPage from "../features/auth/pages/Register";
 import Login from "../features/auth/pages/Login";
 import AppLayout from "./AppLayout";
 import CreatePost from "../features/post/pages/CreatePost";
+import Post from "../features/post/pages/Post";
+import Profile from "../features/profile/pages/Profile";
 
 export const routes = createBrowserRouter([
   {
@@ -19,11 +21,15 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Post />,
       },
       {
         path: "/create-post",
         element: <CreatePost />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
