@@ -1,12 +1,19 @@
-import { createBrowserRouter } from "react-router";
-import RegisterPage from "../features/auth/pages/Register";
-import Login from "../features/auth/pages/Login";
-import AppLayout from "./AppLayout";
-import CreatePost from "../features/post/pages/CreatePost";
-import Post from "../features/post/pages/Post";
-import Profile from "../features/profile/pages/Profile";
-import PublicProfilePage from "../features/profile/pages/PublicProfilePage";
+import { lazy } from "react";
 import Protected from "../features/auth/components/Protected";
+import { createBrowserRouter } from "react-router";
+
+const Login = lazy(() => import("../features/auth/pages/Login"));
+const RegisterPage = lazy(() => import("../features/auth/pages/Register"));
+
+const CreatePost = lazy(() => import("../features/post/pages/CreatePost"));
+const Post = lazy(() => import("../features/post/pages/Post"));
+
+const Profile = lazy(() => import("../features/profile/pages/Profile"));
+const PublicProfilePage = lazy(
+  () => import("../features/profile/pages/PublicProfilePage"),
+);
+
+const AppLayout = lazy(() => import("./AppLayout"));
 
 export const routes = createBrowserRouter([
   {

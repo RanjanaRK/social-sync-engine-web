@@ -9,9 +9,8 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      {/* <header className="sticky top-4 z-50 hidden px-4 md:block"> */}
-      <header className="fixed top-0 right-0 left-0 z-50 h-16 ...">
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between rounded-3xl border border-white/20 bg-white/5 px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.37)] backdrop-blur-2xl">
+      <header className="fixed top-0 right-0 left-0 z-50 hidden h-16 px-4 md:block">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-3xl border border-white/20 bg-white/5 px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.37)] backdrop-blur-2xl">
           {/* Logo */}
           <Link
             to="/"

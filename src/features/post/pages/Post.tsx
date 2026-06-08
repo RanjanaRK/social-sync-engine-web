@@ -4,39 +4,13 @@ import type { RootState } from "../../../app/app.store";
 import PostCard from "../components/PostCard";
 import usePost from "../hooks/usePost";
 
-const demoPost = {
-  username: "sparkle",
-  avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200",
-
-  caption: "Testing Embla carousel in SocialSync 🚀",
-
-  images: [
-    {
-      url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1200",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200",
-    },
-  ],
-};
-
 const Post = () => {
   const posts = useSelector((state: RootState) => state.post.posts);
 
   const { handleGetAllPost } = usePost();
 
-  const fetchPosts = async () => {
-    const data = await handleGetAllPost();
-  };
-
   useEffect(() => {
-    fetchPosts();
+    handleGetAllPost();
   }, []);
 
   return (
