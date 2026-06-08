@@ -2,7 +2,7 @@ import axios from "axios";
 import type { ProfileResponse } from "../utils/types";
 
 const profileApiInstance = axios.create({
-  baseURL: `${import.meta.env.REACT_APP_API_URL}/api/user`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api/user`,
   withCredentials: true,
 });
 
