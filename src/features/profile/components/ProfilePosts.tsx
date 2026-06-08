@@ -1,9 +1,7 @@
-import { toast } from "sonner";
-import usePost from "../../post/hooks/usePost";
-import type { Post } from "../../post/utils/types";
 import { Trash2 } from "lucide-react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../app/app.store";
+import type { Post } from "../../post/utils/types";
 
 type Props = {
   posts: Post[];
@@ -11,20 +9,7 @@ type Props = {
 };
 
 const ProfilePosts = ({ posts, deleteHandle }: Props) => {
-  // const { handleDeletePost } = usePost();
-
   const { user } = useSelector((state: RootState) => state.auth);
-
-  // const handleDelete = async (postId: string) => {
-  //   try {
-  //     console.log("Component:", postId);
-  //     const res = await handleDeletePost(postId);
-
-  //     toast.success(res.message);
-  //   } catch {
-  //     toast.error("Failed to delete post");
-  //   }
-  // };
 
   return (
     <section>

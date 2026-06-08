@@ -16,7 +16,7 @@ const AppLayout = () => {
 
         <Navbar />
 
-        <main className="pb-24 md:pb-0">
+        <main className="pt-10 pb-24 md:pb-0">
           <Outlet />
         </main>
       </div>

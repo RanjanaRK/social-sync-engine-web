@@ -5,13 +5,13 @@ const ProfileHeader = () => {
     <section className="overflow-hidden rounded-3xl border border-white/10 bg-[#0d1b2a]/80 p-5 backdrop-blur-xl md:p-8">
       <div className="flex flex-col gap-6 md:flex-row md:items-center">
         {/* Avatar */}
-        <div className="flex justify-center md:block">
+        {/* <div className="flex justify-center md:block">
           <img
             src="https://i.pravatar.cc/300"
             alt="profile"
             className="h-28 w-28 rounded-full border-4 border-white/10 object-cover md:h-36 md:w-36"
           />
-        </div>
+        </div> */}
 
         {/* Profile Info */}
         <div className="flex-1 text-center md:text-left">

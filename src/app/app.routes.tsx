@@ -6,6 +6,7 @@ import CreatePost from "../features/post/pages/CreatePost";
 import Post from "../features/post/pages/Post";
 import Profile from "../features/profile/pages/Profile";
 import PublicProfilePage from "../features/profile/pages/PublicProfilePage";
+import Protected from "../features/auth/components/Protected";
 
 export const routes = createBrowserRouter([
   {
@@ -22,19 +23,35 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Post />,
+        element: (
+          <Protected>
+            <Post />
+          </Protected>
+        ),
       },
       {
         path: "/create-post",
-        element: <CreatePost />,
+        element: (
+          <Protected>
+            <CreatePost />,
+          </Protected>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <Protected>
+            <Profile />,
+          </Protected>
+        ),
       },
       {
         path: "/profile/:username",
-        element: <PublicProfilePage />,
+        element: (
+          <Protected>
+            <PublicProfilePage />,
+          </Protected>
+        ),
       },
     ],
   },

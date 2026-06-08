@@ -19,3 +19,12 @@ export const getCurrentProfile = async (): Promise<ProfileResponse> => {
 
   return response.data;
 };
+
+export const updateProfileImage = async (file: File) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const res = await profileApiInstance.patch("/profile-image", formData);
+
+  return res.data;
+};

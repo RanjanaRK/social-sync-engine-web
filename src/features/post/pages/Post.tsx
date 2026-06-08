@@ -31,11 +31,8 @@ const Post = () => {
 
   const { handleGetAllPost } = usePost();
 
-  console.log(posts);
-
   const fetchPosts = async () => {
     const data = await handleGetAllPost();
-    console.log(data);
   };
 
   useEffect(() => {

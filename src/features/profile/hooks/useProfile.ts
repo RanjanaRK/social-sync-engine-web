@@ -1,6 +1,10 @@
 import { useDispatch } from "react-redux";
-import { getCurrentProfile, getPublicProfile } from "../service/profile.api";
-import { setProfile } from "../state/profile.slice";
+import {
+  getCurrentProfile,
+  getPublicProfile,
+  updateProfileImage,
+} from "../service/profile.api";
+import { setProfile, updateProfileImageState } from "../state/profile.slice";
 
 const useProfile = () => {
   const dispatch = useDispatch();
@@ -20,9 +24,19 @@ const useProfile = () => {
 
     return data;
   };
+
+  const handleUpdateProfileImage = async (file: File) => {
+    const res = await updateProfileImage(file);
+
+    dispatch(updateProfileImageState(res.data.profileImage));
+
+    return res;
+  };
+
   return {
     handleGetProfile,
     handleGetCurrentProfile,
+    handleUpdateProfileImage,
   };
 };
 

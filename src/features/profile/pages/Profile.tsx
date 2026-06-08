@@ -23,8 +23,6 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
-  // const { user } = useSelector((state: RootState) => state.auth);
-
   const handleDelete = async (postId: string) => {
     try {
       console.log("Component:", postId);

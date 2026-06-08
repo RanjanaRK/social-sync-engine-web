@@ -32,9 +32,15 @@ const profileSlice = createSlice({
       state.posts = [];
       state.postsCount = 0;
     },
+    updateProfileImageState: (state, action: PayloadAction<string>) => {
+      if (state.user) {
+        state.user.profileImage = action.payload;
+      }
+    },
   },
 });
 
-export const { setProfile, removePost, clearProfile } = profileSlice.actions;
+export const { setProfile, removePost, clearProfile, updateProfileImageState } =
+  profileSlice.actions;
 
 export default profileSlice.reducer;
