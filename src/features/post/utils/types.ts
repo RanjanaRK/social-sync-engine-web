@@ -1,13 +1,4 @@
-export interface User {
-  createdAt: string;
-  email: string;
-  profileImage: string;
-  role: string;
-  updatedAt: string;
-  username: string;
-  __v: number;
-  _id: string;
-}
+import type { User } from "../../auth/utils/authType";
 
 export interface PostImage {
   url: string;

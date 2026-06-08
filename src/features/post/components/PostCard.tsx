@@ -1,9 +1,9 @@
-import { Heart, MessageCircle } from "lucide-react";
-import PostCarousel from "./PostCarousel";
-import LikeButton from "./LikeButton";
-import { Link } from "react-router";
+import { MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
 import usePost from "../hooks/usePost";
+import LikeButton from "./LikeButton";
+import PostCarousel from "./PostCarousel";
 
 type PostCardProps = {
   username: string;

@@ -1,7 +1,12 @@
 import { useDispatch } from "react-redux";
-import { setUser } from "../../auth/state/auth.slice";
-import { createPost, getAllPosts, likePost } from "../service/post.api";
+import {
+  createPost,
+  deletePost,
+  getAllPosts,
+  likePost,
+} from "../service/post.api";
 import { setPosts } from "../state/post.slice";
+import { removePost } from "../../profile/state/profile.slice";
 
 const usePost = () => {
   const dispatch = useDispatch();
@@ -20,13 +25,26 @@ const usePost = () => {
     return data;
   };
 
+  const handleDeletePost = async (postId: string) => {
+    const data = await deletePost(postId);
+
+    dispatch(removePost(postId));
+
+    return data;
+  };
+
   const handleLikePost = async (postId: string, emoji: string = "like") => {
     const data = await likePost(postId, emoji);
 
     return data;
   };
 
-  return { handleCreatePost, handleGetAllPost, handleLikePost };
+  return {
+    handleCreatePost,
+    handleGetAllPost,
+    handleDeletePost,
+    handleLikePost,
+  };
 };
 
 export default usePost;

@@ -22,7 +22,11 @@ const profileSlice = createSlice({
       state.posts = action.payload.posts;
       state.postsCount = action.payload.postsCount;
     },
+    removePost: (state, action: PayloadAction<string>) => {
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
 
+      state.postsCount = Math.max(0, state.postsCount - 1);
+    },
     clearProfile: (state) => {
       state.user = null;
       state.posts = [];
@@ -31,6 +35,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setProfile, clearProfile } = profileSlice.actions;
+export const { setProfile, removePost, clearProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;
