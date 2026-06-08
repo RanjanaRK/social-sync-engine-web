@@ -2,23 +2,20 @@ import { ImagePlus } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 
 type Props = {
-  image?: File;
-  onChange: (file: File) => void;
+  images: File[];
+  onChange: (files: File[]) => void;
 };
 
-const ImageDropzone = ({ image, onChange }: Props) => {
+const ImageDropzone = ({ images, onChange }: Props) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
     },
-    multiple: false,
+    multiple: true,
+    maxFiles: 5,
 
     onDrop: (acceptedFiles) => {
-      const file = acceptedFiles[0];
-
-      if (file) {
-        onChange(file);
-      }
+      onChange(acceptedFiles);
     },
   });
 
@@ -29,12 +26,17 @@ const ImageDropzone = ({ image, onChange }: Props) => {
     >
       <input {...getInputProps()} />
 
-      {image ? (
-        <img
-          src={URL.createObjectURL(image)}
-          alt="preview"
-          className="max-h-96 w-full rounded-2xl object-cover"
-        />
+      {images.length > 0 ? (
+        <div className="grid grid-cols-2 gap-2">
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={URL.createObjectURL(image)}
+              alt={`preview-${index}`}
+              className="h-48 w-full rounded-2xl object-cover"
+            />
+          ))}
+        </div>
       ) : (
         <div className="flex flex-col items-center gap-3 text-gray-400">
           <ImagePlus size={40} />

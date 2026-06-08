@@ -33,7 +33,7 @@ export const routes = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/profile/:userId",
+        path: "/profile/:username",
         element: <PublicProfilePage />,
       },
     ],

@@ -1,9 +1,13 @@
 export interface User {
-  id: string;
-  username: string;
+  createdAt: string;
   email: string;
+  profileImage: string;
+  role: string;
+  updatedAt: string;
+  username: string;
   bio: string;
-  image: string[];
+  __v: number;
+  _id: string;
 }
 
 export interface AuthResponse {

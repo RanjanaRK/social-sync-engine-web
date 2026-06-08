@@ -6,8 +6,15 @@ import {
   createPostSchema,
   type CreatePostSchemaType,
 } from "../utils/zodSchema";
+import usePost from "../hooks/usePost";
+import axios from "axios";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 const CreatePost = () => {
+  const { handleCreatePost } = usePost();
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -18,19 +25,33 @@ const CreatePost = () => {
     resolver: zodResolver(createPostSchema),
     defaultValues: {
       caption: "",
+      images: [],
     },
   });
 
-  const image = watch("image");
+  const images = watch("images");
   const caption = watch("caption");
 
-  const handleCreatePost = async (data: CreatePostSchemaType) => {
+  const handlePost = async (data: CreatePostSchemaType) => {
     const formData = new FormData();
 
     formData.append("caption", data.caption);
-    formData.append("image", data.image);
 
-    console.log("submit");
+    data.images.forEach((image) => {
+      formData.append("images", image);
+    });
+
+    try {
+      const res = await handleCreatePost(formData);
+
+      toast.success(res.message);
+
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message ?? "Failed to create post");
+      }
+    }
   };
 
   return (
@@ -38,7 +59,7 @@ const CreatePost = () => {
       <div className="rounded-4xl border border-white/10 bg-[#0d1b2a]/80 p-8 backdrop-blur-2xl">
         <h1 className="mb-6 text-3xl font-black text-white">Create Post</h1>
 
-        <form onSubmit={handleSubmit(handleCreatePost)} className="space-y-5">
+        <form onSubmit={handleSubmit(handlePost)} className="space-y-5">
           <div>
             <textarea
               {...register("caption")}
@@ -57,15 +78,15 @@ const CreatePost = () => {
           </div>
 
           <ImageDropzone
-            image={image}
-            onChange={(file) =>
-              setValue("image", file, {
+            images={images}
+            onChange={(files) =>
+              setValue("images", files, {
                 shouldValidate: true,
               })
             }
           />
 
-          <p className="text-sm text-red-400">{errors.image?.message}</p>
+          <p className="text-sm text-red-400">{errors.images?.message}</p>
 
           <button
             type="submit"

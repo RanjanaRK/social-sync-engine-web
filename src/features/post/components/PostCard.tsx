@@ -1,6 +1,7 @@
 import { Heart, MessageCircle } from "lucide-react";
 import PostCarousel from "./PostCarousel";
 import LikeButton from "./LikeButton";
+import { Link } from "react-router";
 
 type PostCardProps = {
   username: string;
@@ -11,6 +12,7 @@ type PostCardProps = {
   images: {
     url: string;
   }[];
+  id: string;
 };
 
 const PostCard = ({
@@ -20,17 +22,20 @@ const PostCard = ({
   likes,
   comments,
   images,
+  id,
 }: PostCardProps) => {
   return (
     <>
       <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0d1b2a]/80 backdrop-blur-xl">
         {/* Header */}
         <div className="flex items-center gap-3 p-4">
-          <img
-            src={avatar}
-            alt={username}
-            className="h-12 w-12 rounded-full object-cover"
-          />
+          <Link to={`/profile/${username}`}>
+            <img
+              src={avatar}
+              alt={username}
+              className="h-12 w-12 rounded-full object-cover"
+            />
+          </Link>
 
           <h3 className="font-semibold text-white">{username}</h3>
         </div>

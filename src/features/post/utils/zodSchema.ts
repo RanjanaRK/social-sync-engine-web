@@ -3,14 +3,10 @@ import { z } from "zod";
 export const createPostSchema = z.object({
   caption: z.string().max(300, "Caption must be less than 300 characters"),
 
-  image: z
-    .instanceof(File, {
-      message: "Image is required",
-    })
-    .refine(
-      (file) => file.size <= 5 * 1024 * 1024,
-      "Image must be less than 5MB",
-    ),
+  images: z
+    .array(z.instanceof(File))
+    .min(1, "At least one image is required")
+    .max(5, "Maximum 5 images"),
 });
 
 export const commentSchema = z.object({

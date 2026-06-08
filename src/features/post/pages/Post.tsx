@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../app/app.store";
 import PostCard from "../components/PostCard";
+import usePost from "../hooks/usePost";
 
 const demoPost = {
   username: "sparkle",
@@ -23,34 +27,37 @@ const demoPost = {
 };
 
 const Post = () => {
+  const posts = useSelector((state: RootState) => state.post.posts);
+
+  const { handleGetAllPost } = usePost();
+
+  console.log(posts);
+
+  const fetchPosts = async () => {
+    const data = await handleGetAllPost();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <>
       {/* <div className="mx-auto flex h-screen flex-col items-center justify-center"> */}
-      <div className="mx-auto w-full max-w-2xl px-3 py-4 sm:px-4 md:px-6">
-        <PostCard
-          username={demoPost.username}
-          avatar={demoPost.avatar}
-          caption={demoPost.caption}
-          likes={125}
-          comments={18}
-          images={demoPost.images}
-        />
-        <PostCard
-          username={demoPost.username}
-          avatar={demoPost.avatar}
-          caption={demoPost.caption}
-          likes={125}
-          comments={18}
-          images={demoPost.images}
-        />
-        <PostCard
-          username={demoPost.username}
-          avatar={demoPost.avatar}
-          caption={demoPost.caption}
-          likes={125}
-          comments={18}
-          images={demoPost.images}
-        />
+      <div className="mx-auto w-full max-w-2xl space-y-6 px-3 py-4 sm:px-4 md:px-6">
+        {posts.map((post) => (
+          <PostCard
+            key={post._id}
+            username={post.user.username}
+            avatar={post.user.profileImage}
+            caption={post.caption}
+            likes={post.likesCount}
+            comments={post.commentsCount}
+            images={post.postImage}
+            id={post._id}
+          />
+        ))}
       </div>
     </>
   );
