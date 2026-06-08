@@ -17,3 +17,15 @@ export const getAllPosts = async (): Promise<PostListResponse> => {
 
   return response.data;
 };
+
+export const deletePost = async (postId: string): Promise<PostResponse> => {
+  const response = await postApiInstance.delete(`/delete/${postId}`);
+
+  return response.data;
+};
+
+export const likePost = async (postId: string, emoji: string = "like") => {
+  const response = await postApiInstance.post(`/like/${postId}`, { emoji });
+
+  return response.data;
+};

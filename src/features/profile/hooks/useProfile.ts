@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { getPublicProfile } from "../service/profile.api";
+import { getCurrentProfile, getPublicProfile } from "../service/profile.api";
 import { setProfile } from "../state/profile.slice";
 
 const useProfile = () => {
@@ -13,8 +13,16 @@ const useProfile = () => {
     return data;
   };
 
+  const handleGetCurrentProfile = async () => {
+    const data = await getCurrentProfile();
+
+    dispatch(setProfile(data.data));
+
+    return data;
+  };
   return {
     handleGetProfile,
+    handleGetCurrentProfile,
   };
 };
 

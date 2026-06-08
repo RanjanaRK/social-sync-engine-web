@@ -2,6 +2,8 @@ import { Heart, MessageCircle } from "lucide-react";
 import PostCarousel from "./PostCarousel";
 import LikeButton from "./LikeButton";
 import { Link } from "react-router";
+import { useState } from "react";
+import usePost from "../hooks/usePost";
 
 type PostCardProps = {
   username: string;
@@ -24,6 +26,27 @@ const PostCard = ({
   images,
   id,
 }: PostCardProps) => {
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(likes);
+
+  const { handleLikePost } = usePost();
+
+  const handleLike = async () => {
+    try {
+      await handleLikePost(id);
+
+      if (liked) {
+        setLiked(false);
+        setLikesCount((prev) => prev - 1);
+      } else {
+        setLiked(true);
+        setLikesCount((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0d1b2a]/80 backdrop-blur-xl">
@@ -50,7 +73,11 @@ const PostCard = ({
               <Heart size={22} />
               {likes}
             </button> */}
-            <LikeButton isLiked={false} likesCount={likes} onLike={() => {}} />
+            <LikeButton
+              likesCount={likesCount}
+              isLiked={liked}
+              onLike={handleLike}
+            />
 
             <button className="flex items-center gap-2 text-gray-300 hover:text-blue-400">
               <MessageCircle size={22} />

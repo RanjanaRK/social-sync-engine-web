@@ -13,3 +13,9 @@ export const getPublicProfile = async (
 
   return response.data;
 };
+
+export const getCurrentProfile = async (): Promise<ProfileResponse> => {
+  const response = await profileApiInstance.get("/me");
+
+  return response.data;
+};

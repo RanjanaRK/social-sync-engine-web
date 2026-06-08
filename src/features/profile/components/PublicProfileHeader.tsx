@@ -4,9 +4,14 @@ import type { User } from "../../auth/utils/authType";
 type Props = {
   user: User;
   postsCount: number;
+  isCurrentUser?: boolean;
 };
 
-const PublicProfileHeader = ({ user, postsCount }: Props) => {
+const PublicProfileHeader = ({
+  user,
+  postsCount,
+  isCurrentUser = false,
+}: Props) => {
   const { username, profileImage, bio } = user;
 
   return (
@@ -30,12 +35,20 @@ const PublicProfileHeader = ({ user, postsCount }: Props) => {
             </div>
           </div>
 
-          <button className="mt-6 rounded-2xl bg-blue-700 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-600">
-            <span className="flex items-center justify-center gap-2">
-              <UserPlus size={18} />
-              Follow
-            </span>
-          </button>
+          <div className="mt-6">
+            {isCurrentUser ? (
+              <button className="rounded-2xl bg-blue-700 px-5 py-2.5 font-semibold text-white hover:bg-blue-600">
+                Edit Profile
+              </button>
+            ) : (
+              <button className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-white hover:bg-white/10">
+                <span className="flex items-center gap-2">
+                  <UserPlus size={18} />
+                  Follow
+                </span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </section>
