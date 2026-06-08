@@ -3,7 +3,7 @@ import type { AuthResponse } from "../utils/authType";
 import type { LoginSchemaType, RegisterSchemaType } from "../utils/zodSchema";
 
 const authApiInstance = axios.create({
-  baseURL: "http://localhost:5000/api/auth",
+  baseURL: `${import.meta.env.REACT_APP_API_URL}/api/auth`,
   withCredentials: true,
 });
 

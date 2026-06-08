@@ -2,7 +2,7 @@ import axios from "axios";
 import type { PostListResponse, PostResponse } from "../utils/types";
 
 const postApiInstance = axios.create({
-  baseURL: "http://localhost:5000/api/post",
+  baseURL: `${import.meta.env.REACT_APP_API_URL}/api/post`,
   withCredentials: true,
 });
 
