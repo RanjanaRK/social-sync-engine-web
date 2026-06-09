@@ -19,7 +19,7 @@ export const getAllPosts = async (): Promise<PostListResponse> => {
 };
 
 export const getSinglePost = async (postId: string): Promise<PostResponse> => {
-  const response = await postApiInstance.get(`/${postId}`);
+  const response = await postApiInstance.get(`/get/${postId}`);
 
   return response.data;
 };

@@ -28,6 +28,8 @@ const PostDetailPage = () => {
     fetchPost();
   }, [postId]);
 
+  console.log(postId, post);
+
   const submitComment = async (comment: string) => {
     if (!postId) return;
 
