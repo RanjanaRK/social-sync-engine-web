@@ -5,10 +5,10 @@ import "./App.css";
 import { routes } from "./app.routes";
 
 const App = () => {
-  const { handleGetMe } = useAuth();
+  const { handleGetme } = useAuth();
 
   useEffect(() => {
-    handleGetMe();
+    handleGetme();
   }, []);
 
   return (

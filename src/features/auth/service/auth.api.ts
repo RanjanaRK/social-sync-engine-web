@@ -29,5 +29,8 @@ export const logout = async (): Promise<AuthResponse> => {
 
 export const getMe = async () => {
   const response = await authApiInstance.get("/me");
+
+  console.log(response);
+
   return response.data;
 };

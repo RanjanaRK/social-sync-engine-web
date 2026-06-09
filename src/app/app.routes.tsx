@@ -1,13 +1,15 @@
 import { lazy } from "react";
 import Protected from "../features/auth/components/Protected";
 import { createBrowserRouter } from "react-router";
-import PostDetailPage from "../features/post/pages/PostDetailPage";
 
 const Login = lazy(() => import("../features/auth/pages/Login"));
 const RegisterPage = lazy(() => import("../features/auth/pages/Register"));
 
 const CreatePost = lazy(() => import("../features/post/pages/CreatePost"));
 const Post = lazy(() => import("../features/post/pages/Post"));
+const PostDetailPage = lazy(
+  () => import("../features/post/pages/PostDetailPage"),
+);
 
 const Profile = lazy(() => import("../features/profile/pages/Profile"));
 const PublicProfilePage = lazy(

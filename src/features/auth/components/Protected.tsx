@@ -1,14 +1,17 @@
-import type { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
 import type { RootState } from "../../../app/app.store";
+import type { ReactNode } from "react";
+import { Navigate } from "react-router";
 
 type Props = {
   children: ReactNode;
 };
 
 const Protected = ({ children }: Props) => {
-  const { user, loading } = useSelector((state: RootState) => state.auth);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const loading = useSelector((state: RootState) => state.auth.loading);
+
+  console.log(user);
 
   if (loading) {
     return <div>Loading...</div>;

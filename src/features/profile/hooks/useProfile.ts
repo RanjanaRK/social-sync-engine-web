@@ -20,6 +20,7 @@ const useProfile = () => {
 
   const handleGetCurrentProfile = async () => {
     const data = await getCurrentProfile();
+    console.log(data);
 
     dispatch(setProfile(data.data));
 

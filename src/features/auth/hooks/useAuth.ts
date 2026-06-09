@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { getMe, login, logout, register } from "../service/auth.api";
-import { setUser } from "../state/auth.slice";
+import { setError, setLoading, setUser } from "../state/auth.slice";
 import type { LoginSchemaType, RegisterSchemaType } from "../utils/zodSchema";
 
 export const useAuth = () => {
@@ -15,14 +15,17 @@ export const useAuth = () => {
   };
 
   const handleLogin = async (lData: LoginSchemaType) => {
-    const response = await login(lData);
-    console.log(response);
+    try {
+      dispatch(setLoading(true));
 
-    dispatch(setUser(response.user));
+      const response = await login(lData);
 
-    // console.log(dispatch(setUser(response.user)));
+      dispatch(setUser(response.user));
 
-    return response;
+      return response;
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handleLogout = async () => {
@@ -35,13 +38,24 @@ export const useAuth = () => {
     return response;
   };
 
-  const handleGetMe = async () => {
-    const response = await getMe();
+  const handleGetme = async () => {
+    try {
+      dispatch(setLoading(true));
 
-    dispatch(setUser(response.user));
+      const data = await getMe();
+      // console.log(data.user);
 
-    return response;
+      if (data.user) {
+        dispatch(setUser(data.user));
+      }
+    } catch (error: any) {
+      // console.log(error);
+
+      dispatch(setError(error));
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
-  return { handleRegister, handleLogin, handleLogout, handleGetMe };
+  return { handleRegister, handleLogin, handleLogout, handleGetme };
 };
