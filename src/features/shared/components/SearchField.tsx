@@ -11,6 +11,11 @@ const SearchField = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (searchQuery.trim().length < 2) {
+      setResults([]);
+      return;
+    }
+
     const timer = setTimeout(async () => {
       try {
         const data = await handleSearchProfile(searchQuery);
