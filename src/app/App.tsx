@@ -1,14 +1,14 @@
+import { useEffect } from "react";
 import { RouterProvider } from "react-router";
+import { useAuth } from "../features/auth/hooks/useAuth";
 import "./App.css";
 import { routes } from "./app.routes";
-import { useAuth } from "../features/auth/hooks/useAuth";
-import { useEffect } from "react";
 
 const App = () => {
-  const { handleGetCurrentUser } = useAuth();
+  const { handleGetMe } = useAuth();
 
   useEffect(() => {
-    handleGetCurrentUser();
+    handleGetMe();
   }, []);
 
   return (

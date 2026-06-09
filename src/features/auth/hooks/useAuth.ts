@@ -1,7 +1,7 @@
-import { getCurrentUser, login, logout, register } from "../service/auth.api";
+import { useDispatch } from "react-redux";
+import { getMe, login, logout, register } from "../service/auth.api";
 import { setUser } from "../state/auth.slice";
 import type { LoginSchemaType, RegisterSchemaType } from "../utils/zodSchema";
-import { useDispatch } from "react-redux";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -35,13 +35,13 @@ export const useAuth = () => {
     return response;
   };
 
-  const handleGetCurrentUser = async () => {
-    const response = await getCurrentUser();
+  const handleGetMe = async () => {
+    const response = await getMe();
 
     dispatch(setUser(response.user));
 
     return response;
   };
 
-  return { handleRegister, handleLogin, handleLogout, handleGetCurrentUser };
+  return { handleRegister, handleLogin, handleLogout, handleGetMe };
 };

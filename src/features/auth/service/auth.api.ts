@@ -27,9 +27,7 @@ export const logout = async (): Promise<AuthResponse> => {
   return response.data;
 };
 
-export const getCurrentUser = async () => {
+export const getMe = async () => {
   const response = await authApiInstance.get("/me");
-  console.log(response.data);
-
   return response.data;
 };
