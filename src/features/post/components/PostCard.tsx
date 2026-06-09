@@ -79,10 +79,13 @@ const PostCard = ({
               onLike={handleLike}
             />
 
-            <button className="flex items-center gap-2 text-gray-300 hover:text-blue-400">
+            <Link
+              to={`/post/${id}`}
+              className="flex items-center gap-2 text-gray-300 hover:text-blue-400"
+            >
               <MessageCircle size={22} />
               {comments}
-            </button>
+            </Link>
           </div>
 
           <p className="text-gray-300">

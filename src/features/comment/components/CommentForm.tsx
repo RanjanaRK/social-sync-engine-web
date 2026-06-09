@@ -7,6 +7,7 @@ type CommentFormData = {
 
 type CommentFormProps = {
   onSubmitComment: (comment: string) => Promise<void> | void;
+
   isLoading?: boolean;
 };
 
@@ -28,14 +29,14 @@ const CommentForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
       <input
         {...register("comment", {
           required: true,
         })}
         type="text"
         placeholder="Write a comment..."
-        className="flex-1 rounded-2xl border border-white/10 bg-[#132238] px-4 py-3 text-white outline-none placeholder:text-gray-500 focus:border-blue-400/40"
+        className="flex-1 rounded-2xl border border-white/10 bg-[#132238] px-4 py-3 text-white outline-none placeholder:text-gray-500"
       />
 
       <button

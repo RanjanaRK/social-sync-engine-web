@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { PostListResponse, PostResponse } from "../utils/types";
 
-const postApiInstance = axios.create({
+export const postApiInstance = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api/post`,
   withCredentials: true,
 });
@@ -14,6 +14,12 @@ export const createPost = async (data: FormData): Promise<PostResponse> => {
 export const getAllPosts = async (): Promise<PostListResponse> => {
   const response = await postApiInstance.get("/get");
   console.log(response);
+
+  return response.data;
+};
+
+export const getPost = async (postId: string): Promise<PostResponse> => {
+  const response = await postApiInstance.get(`/${postId}`);
 
   return response.data;
 };

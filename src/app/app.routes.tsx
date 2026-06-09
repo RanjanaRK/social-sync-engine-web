@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import Protected from "../features/auth/components/Protected";
 import { createBrowserRouter } from "react-router";
+import PostDetailPage from "../features/post/pages/PostDetailPage";
 
 const Login = lazy(() => import("../features/auth/pages/Login"));
 const RegisterPage = lazy(() => import("../features/auth/pages/Register"));
@@ -33,6 +34,14 @@ export const routes = createBrowserRouter([
         element: (
           <Protected>
             <Post />
+          </Protected>
+        ),
+      },
+      {
+        path: "/post/:postId",
+        element: (
+          <Protected>
+            <PostDetailPage />
           </Protected>
         ),
       },

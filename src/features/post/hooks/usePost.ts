@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  getSinglePost,
   likePost,
 } from "../service/post.api";
 import { setPosts } from "../state/post.slice";
@@ -25,6 +26,12 @@ const usePost = () => {
     return data;
   };
 
+  const handleGetSinglePost = async (postId: string) => {
+    const res = await getSinglePost(postId);
+
+    return res;
+  };
+
   const handleDeletePost = async (postId: string) => {
     const data = await deletePost(postId);
 
@@ -42,6 +49,7 @@ const usePost = () => {
   return {
     handleCreatePost,
     handleGetAllPost,
+    handleGetSinglePost,
     handleDeletePost,
     handleLikePost,
   };
