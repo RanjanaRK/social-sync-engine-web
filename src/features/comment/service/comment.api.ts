@@ -1,7 +1,7 @@
 import { postApiInstance } from "../../post/service/post.api";
 
 export const createComment = async (postId: string, content: string) => {
-  const response = await postApiInstance.post(`/${postId}/comments`, {
+  const response = await postApiInstance.post(`/posts/${postId}/comments`, {
     content,
   });
 
@@ -9,7 +9,7 @@ export const createComment = async (postId: string, content: string) => {
 };
 
 export const getComments = async (postId: string) => {
-  const response = await postApiInstance.get(`/${postId}/comments`);
+  const response = await postApiInstance.get(`/posts/${postId}/comments`);
 
   return response.data;
 };
