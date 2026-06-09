@@ -47,7 +47,6 @@ const PostDetailPage = () => {
       <div className="mt-6">
         <CommentForm onSubmitComment={submitComment} />
       </div>
-
       <div className="mt-6">
         <CommentList postId={postId!} refreshTrigger={refreshComments} />
       </div>
