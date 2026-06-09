@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import {
   getCurrentProfile,
   getPublicProfile,
+  searchUser,
   updateProfileImage,
 } from "../service/profile.api";
 import { setProfile, updateProfileImageState } from "../state/profile.slice";
@@ -33,10 +34,17 @@ const useProfile = () => {
     return res;
   };
 
+  const handleSearchProfile = async (username: string) => {
+    const res = await searchUser(username);
+
+    return res.data;
+  };
+
   return {
     handleGetProfile,
     handleGetCurrentProfile,
     handleUpdateProfileImage,
+    handleSearchProfile,
   };
 };
 

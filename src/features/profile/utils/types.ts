@@ -10,3 +10,9 @@ export interface ProfileResponse {
     postsCount: number;
   };
 }
+
+export interface SearchResponse {
+  success: true;
+  message: string;
+  data: User[];
+}

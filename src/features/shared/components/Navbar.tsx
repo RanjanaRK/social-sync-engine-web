@@ -2,6 +2,7 @@ import { Home, Menu, PlusSquare, User, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import LogoutButton from "../../auth/components/LogoutButton";
+import SearchField from "./SearchField";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +21,7 @@ const Navbar = () => {
           </Link>
 
           {/* Search */}
-          <input
-            type="text"
-            placeholder="Search users..."
-            className="w-80 rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-white backdrop-blur-md outline-none"
-          />
+          <SearchField />
 
           {/* Navigation */}
           <div className="flex items-center gap-2">
@@ -78,11 +75,7 @@ const Navbar = () => {
 
         {isOpen && (
           <div className="border-t border-white/10 p-4">
-            <input
-              type="text"
-              placeholder="Search users..."
-              className="mb-4 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white"
-            />
+            <SearchField />
 
             <div className="flex flex-col gap-3">
               <LogoutButton />
