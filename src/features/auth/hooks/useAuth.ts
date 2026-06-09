@@ -38,6 +38,8 @@ export const useAuth = () => {
     const response = await getCurrentUser();
 
     dispatch(setUser(response.user));
+
+    return response;
   };
 
   return { handleRegister, handleLogin, handleLogout, handleGetCurrentUser };
