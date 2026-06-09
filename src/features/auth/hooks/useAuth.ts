@@ -16,6 +16,7 @@ export const useAuth = () => {
 
   const handleLogin = async (lData: LoginSchemaType) => {
     const response = await login(lData);
+    console.log(response);
 
     dispatch(setUser(response.user));
 

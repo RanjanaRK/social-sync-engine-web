@@ -9,6 +9,7 @@ type Props = {
 
 const Protected = ({ children }: Props) => {
   const { user, loading } = useSelector((state: RootState) => state.auth);
+  console.log(user);
 
   if (loading) {
     return <div>Loading...</div>;
