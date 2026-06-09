@@ -18,7 +18,7 @@ export const getAllPosts = async (): Promise<PostListResponse> => {
   return response.data;
 };
 
-export const getPost = async (postId: string): Promise<PostResponse> => {
+export const getSinglePost = async (postId: string): Promise<PostResponse> => {
   const response = await postApiInstance.get(`/${postId}`);
 
   return response.data;
