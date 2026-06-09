@@ -6,7 +6,6 @@ import usePost from "../hooks/usePost";
 
 const Post = () => {
   const posts = useSelector((state: RootState) => state.post.posts);
-  console.log(posts);
 
   const { handleGetAllPost } = usePost();
 

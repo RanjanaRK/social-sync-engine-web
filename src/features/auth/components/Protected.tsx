@@ -11,8 +11,6 @@ const Protected = ({ children }: Props) => {
   const user = useSelector((state: RootState) => state.auth.user);
   const loading = useSelector((state: RootState) => state.auth.loading);
 
-  console.log(user);
-
   if (loading) {
     return <div>Loading...</div>;
   }
