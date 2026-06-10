@@ -1,73 +1,194 @@
-# React + TypeScript + Vite
+# Social Sync Engine - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern social media web application built with React, TypeScript, Vite, Redux Toolkit and Tailwind CSS. Social Sync Engine allows users to connect, share posts, engage through likes and comments, and manage their profiles seamlessly.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 🔐 Authentication
 
-## React Compiler
+- User Registration
+- User Login
+- JWT-based Authentication
+- Protected Routes
+- Persistent Login State
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 👤 User Profile
 
-## Expanding the ESLint configuration
+- Upload Profile Picture
+- View Public Profiles
+- Search Users by Username
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📝 Posts
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Create Posts with Caption
+- Upload Images
+- Delete Own Posts
+- View Feed Posts
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Responsive Post Cards
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- ❤️ Social Interactions
+- Like / Unlike Posts
+- Comment on Posts
+- View Post Engagement
+
+### 🔍 Search
+
+- Search Users by Username
+- Navigate to Public User Profiles
+
+### 📱 Responsive Design
+
+- Mobile Friendly UI
+- Tablet Support
+- Desktop Optimized Layout
+
+### 🔔 User Experience
+
+- Toast Notifications
+- Form Validation
+- Loading States
+- Error Handling
+- Smooth Navigation
+
+### 🚧 Upcoming Features
+
+- Follow / Unfollow Users
+- Real-time Notifications
+- Direct Messaging
+- Infinite Scrolling Feed
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React 19
+- TypeScript
+- Vite
+
+### State Management
+
+- Redux Toolkit
+- React Redux
+
+### Server State Management
+
+- TanStack React Query
+- Routing
+- React Router v7
+
+### Forms & Validation
+
+- React Hook Form
+- Zod
+- Hookform Resolvers
+
+### API Communication
+
+- Axios
+
+### UI & Styling
+
+- Tailwind CSS v4
+- Lucide React Icons
+- Sonner Toast
+
+### File Upload
+
+- React Dropzone
+- Embla Carousel
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+│
+├── app/
+├── features/
+│   ├── auth/
+│   └── comments/
+│   ├── post/
+│   ├── profile/
+│   └── user/
+│   └── shared/
+
+└── assets/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Clone Repository
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+git clone https://github.com/your-username/social-sync-engine.git
+```
+
+### Navigate to Frontend
+
+```
+cd social-sync-engine/frontend
+```
+
+### Install Dependencies
+
+```
+npm install
+
+```
+
+### Create Environment Variables
+
+Create a .env file:
+
+```
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+### Run Development Server
+
+```npm run dev
+
+```
+
+### Application will run on:
+
+```
+http://localhost:5173
+
+```
+
+---
+
+## 🔄 Application Data Flow
+
+```Backend API
+     ↓
+API Layer (Axios)
+     ↓
+Redux Store
+     ↓
+Custom Hooks
+     ↓
+UI Components
+```
+
+### Example Flow
+
+```User creates a post
+      ↓
+Custom Hook triggers action
+      ↓
+API request sent via Axios
+      ↓
+Backend processes request
+      ↓
+Response stored in Redux Store
+      ↓
+Hook retrieves updated state
+      ↓
+UI re-renders automatically
 ```
