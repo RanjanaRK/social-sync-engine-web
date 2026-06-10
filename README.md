@@ -192,3 +192,12 @@ Hook retrieves updated state
       ↓
 UI re-renders automatically
 ```
+
+## 👨‍💻 Author
+
+**Ranjana Kumari**  
+Full-Stack Developer
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
