@@ -193,6 +193,12 @@ Hook retrieves updated state
 UI re-renders automatically
 ```
 
+---
+
+## 🌐 Backend Repository
+
+https://github.com/RanjanaRK/social-sync-engine-api
+
 ## 👨‍💻 Author
 
 **Ranjana Kumari**  
