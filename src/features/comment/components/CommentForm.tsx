@@ -1,9 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SendHorizontal } from "lucide-react";
 import { useForm } from "react-hook-form";
-
-type CommentFormData = {
-  comment: string;
-};
+import {
+  commentSchema,
+  type CommentSchemaType,
+} from "../../post/utils/zodSchema";
 
 type CommentFormProps = {
   onSubmitComment: (comment: string) => Promise<void> | void;
@@ -20,9 +21,11 @@ const CommentForm = ({
     handleSubmit,
     reset,
     formState: { isSubmitting },
-  } = useForm<CommentFormData>();
+  } = useForm<CommentSchemaType>({
+    resolver: zodResolver(commentSchema),
+  });
 
-  const onSubmit = async (data: CommentFormData) => {
+  const onSubmit = async (data: CommentSchemaType) => {
     await onSubmitComment(data.comment);
 
     reset();
