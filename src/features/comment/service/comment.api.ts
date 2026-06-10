@@ -1,15 +1,19 @@
 import { postApiInstance } from "../../post/service/post.api";
+import type { CommentResponse } from "../utils/commentTypes";
 
 export const createComment = async (postId: string, content: string) => {
   const response = await postApiInstance.post(`/posts/${postId}/comments`, {
-    content,
+    comment: content,
   });
+
+  console.log(response);
 
   return response.data;
 };
 
-export const getComments = async (postId: string) => {
+export const getComments = async (postId: string): Promise<CommentResponse> => {
   const response = await postApiInstance.get(`/posts/${postId}/comments`);
+  console.log(response);
 
   return response.data;
 };

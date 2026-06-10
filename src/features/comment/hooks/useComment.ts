@@ -10,7 +10,11 @@ const useComment = () => {
   };
 
   const handleGetComments = async (postId: string) => {
-    return await getComments(postId);
+    const res = await getComments(postId);
+
+    console.log(res.data);
+
+    return res;
   };
 
   const handleDeleteComment = async (postId: string, commentId: string) => {

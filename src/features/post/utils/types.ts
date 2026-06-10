@@ -25,7 +25,7 @@ export interface Post {
 export interface PostResponse {
   success: true;
   message: string;
-  post: Post;
+  data: Post;
 }
 
 export interface PostListResponse {

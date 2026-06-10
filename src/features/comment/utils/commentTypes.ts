@@ -2,7 +2,7 @@ import type { User } from "../../auth/utils/authType";
 
 export interface Comment {
   _id: string;
-  content: string;
+  comment: string;
   createdAt: string;
 
   user: User;

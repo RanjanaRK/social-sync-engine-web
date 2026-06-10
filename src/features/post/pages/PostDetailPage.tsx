@@ -22,7 +22,7 @@ const PostDetailPage = () => {
 
       const res = await handleGetSinglePost(postId);
 
-      setPost(res.post);
+      setPost(res);
     };
 
     fetchPost();

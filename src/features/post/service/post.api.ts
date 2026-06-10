@@ -13,7 +13,6 @@ export const createPost = async (data: FormData): Promise<PostResponse> => {
 
 export const getAllPosts = async (): Promise<PostListResponse> => {
   const response = await postApiInstance.get("/get");
-  console.log(response);
 
   return response.data;
 };

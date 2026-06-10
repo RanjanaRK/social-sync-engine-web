@@ -29,7 +29,7 @@ const usePost = () => {
   const handleGetSinglePost = async (postId: string) => {
     const res = await getSinglePost(postId);
 
-    return res;
+    return res.data;
   };
 
   const handleDeletePost = async (postId: string) => {

@@ -58,7 +58,7 @@ const CommentList = ({ postId, refreshTrigger }: Props) => {
             </button>
           </div>
 
-          <p className="mt-2 text-gray-300">{comment.content}</p>
+          <p className="mt-2 text-gray-300">{comment.comment}</p>
         </div>
       ))}
     </div>
