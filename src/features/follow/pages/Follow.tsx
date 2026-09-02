@@ -53,11 +53,13 @@ const FollowPage = () => {
     try {
       const res = await handleRemoveFollower(username);
 
+      console.log({ res });
+
       setFollowers((prev) =>
         prev.filter((person) => person.username !== username),
       );
 
-      toast.success(res.success);
+      toast.success(res.message);
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
@@ -98,7 +100,7 @@ const FollowPage = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mb-5 rounded-2xl border border-white/[0.06] bg-[#151116] p-1">
+        <div className="mb-5 rounded-2xl border border-white/6 bg-[#151116] p-1">
           <div className="grid grid-cols-2 gap-1">
             <button
               type="button"
@@ -106,7 +108,7 @@ const FollowPage = () => {
               className={`relative rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
                 activeTab === "followers"
                   ? "bg-[#E7A8BD] text-[#170F13] shadow-[0_6px_20px_rgba(231,168,189,0.12)]"
-                  : "text-[#8E858B] hover:bg-white/[0.04] hover:text-[#F3EDF0]"
+                  : "text-[#8E858B] hover:bg-white/4 hover:text-[#F3EDF0]"
               }`}
             >
               Followers
@@ -127,7 +129,7 @@ const FollowPage = () => {
               className={`rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
                 activeTab === "following"
                   ? "bg-[#E7A8BD] text-[#170F13] shadow-[0_6px_20px_rgba(231,168,189,0.12)]"
-                  : "text-[#8E858B] hover:bg-white/[0.04] hover:text-[#F3EDF0]"
+                  : "text-[#8E858B] hover:bg-white/4 hover:text-[#F3EDF0]"
               }`}
             >
               Following
@@ -150,12 +152,12 @@ const FollowPage = () => {
             {[1, 2, 3, 4, 5].map((item) => (
               <div
                 key={item}
-                className="flex animate-pulse items-center gap-4 rounded-2xl border border-white/[0.05] bg-[#151116] p-4"
+                className="flex animate-pulse items-center gap-4 rounded-2xl border border-white/5 bg-[#151116] p-4"
               >
-                <div className="h-12 w-12 rounded-full bg-white/[0.06]" />
+                <div className="h-12 w-12 rounded-full bg-white/6" />
 
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 w-32 rounded bg-white/[0.06]" />
+                  <div className="h-4 w-32 rounded bg-white/6" />
                   <div className="h-3 w-48 rounded bg-white/[0.035]" />
                 </div>
               </div>
@@ -177,7 +179,7 @@ const FollowPage = () => {
             ))}
           </div>
         ) : (
-          <div className="rounded-3xl border border-white/[0.06] bg-[#151116] px-6 py-16 text-center">
+          <div className="rounded-3xl border border-white/6 bg-[#151116] px-6 py-16 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E7A8BD]/10 text-[#E7A8BD]">
               <Users size={24} />
             </div>

@@ -37,8 +37,7 @@ const PublicProfilePage = () => {
     return <ProfileSkeleton />;
   }
 
-  const isCurrentUser = loggedInUser?._id === user?._id;
-
+  const isCurrentUsername = loggedInUser?.username === user?.username;
   /* Page */
 
   return (
@@ -48,7 +47,7 @@ const PublicProfilePage = () => {
         <PublicProfileHeader
           user={user}
           postsCount={postsCount}
-          isCurrentUser={isCurrentUser}
+          isCurrentUser={isCurrentUsername}
         />
 
         {/* Posts */}

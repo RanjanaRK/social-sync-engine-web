@@ -30,7 +30,7 @@ const FollowUserCard = ({
   };
 
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.025] p-4 transition-all duration-200 hover:border-[#E7A8BD]/20 hover:bg-[#E7A8BD]/[0.045]">
+    <div className="flex items-center gap-4 rounded-2xl border border-white/6 bg-white/2.5 p-4 transition-all duration-200 hover:border-[#E7A8BD]/20 hover:bg-[#E7A8BD]/4.5">
       {/* Profile */}
       <button
         type="button"

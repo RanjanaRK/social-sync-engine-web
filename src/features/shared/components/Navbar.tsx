@@ -367,7 +367,17 @@
 
 // export default Navbar;
 
-import { Bell, Home, Menu, Plus, Search, User, Users, X } from "lucide-react";
+import {
+  Bell,
+  Heart,
+  Home,
+  Menu,
+  Plus,
+  Search,
+  User,
+  Users,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 
@@ -395,16 +405,14 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ===================================================== */}
       {/* Desktop Navbar */}
-      {/* ===================================================== */}
 
       <header className="fixed top-0 right-0 left-0 z-50 hidden px-4 pt-4 md:block">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between rounded-2xl border border-white/[0.07] bg-[#110E12]/90 px-5 shadow-[0_12px_45px_rgba(0,0,0,0.25)] backdrop-blur-xl">
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E7A8BD]/15 bg-[#E7A8BD]/[0.06] transition-all duration-200 group-hover:border-[#E7A8BD]/30 group-hover:bg-[#E7A8BD]/10">
-              <span className="text-lg leading-none text-[#E7A8BD]">♡</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E7A8BD]/15 bg-[#E7A8BD]/6 transition-all duration-200 group-hover:border-[#E7A8BD]/30 group-hover:bg-[#E7A8BD]/10">
+              <img src="/favicon.png" alt="logo" className="h-4 w-4" />
             </div>
 
             <span className="text-[16px] font-semibold tracking-[-0.03em] text-[#F8F3F6]">
@@ -495,16 +503,14 @@ const Navbar = () => {
         </nav>
       </header>
 
-      {/* ===================================================== */}
       {/* Mobile Top Navbar */}
-      {/* ===================================================== */}
 
       <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#0B090C]/95 backdrop-blur-xl md:hidden">
-        <div className="flex h-[60px] items-center justify-between px-4">
+        <div className="flex h-15 items-center justify-between px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E7A8BD]/15 bg-[#E7A8BD]/[0.06]">
-              <span className="text-base text-[#E7A8BD]">♡</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E7A8BD]/15 bg-[#E7A8BD]/6">
+              <img src="/favicon.png" alt="logo" className="h-4 w-4" />
             </div>
 
             <span className="text-[15px] font-semibold text-[#F8F3F6]">
@@ -517,14 +523,14 @@ const Navbar = () => {
           <div className="flex items-center gap-1">
             <Link
               to="/search"
-              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E] hover:bg-white/[0.04] hover:text-[#E8E0E4]"
+              className="hover:bg-white/4hover:text-[#E8E0E4] flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E]"
             >
               <Search size={20} />
             </Link>
 
             <button
               onClick={() => setIsOpen((prev) => !prev)}
-              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/[0.04] hover:text-[#E8E0E4]"
+              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/4 hover:text-[#E8E0E4]"
               aria-label="Menu"
             >
               {isOpen ? <X size={21} /> : <Menu size={21} />}
@@ -543,7 +549,7 @@ const Navbar = () => {
               <Link
                 to="/"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] hover:bg-white/[0.04] hover:text-[#E7A8BD]"
+                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
               >
                 <Home size={19} />
                 Home
@@ -552,7 +558,7 @@ const Navbar = () => {
               <Link
                 to="/following"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] hover:bg-white/[0.04] hover:text-[#E7A8BD]"
+                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
               >
                 <Users size={19} />
                 Following
@@ -561,7 +567,7 @@ const Navbar = () => {
               <Link
                 to="/create-post"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] hover:bg-white/[0.04] hover:text-[#E7A8BD]"
+                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
               >
                 <Plus size={19} />
                 Create post
@@ -570,7 +576,7 @@ const Navbar = () => {
               <Link
                 to="/notifications"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] hover:bg-white/[0.04] hover:text-[#E7A8BD]"
+                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
               >
                 <Bell size={19} />
                 Notifications
@@ -579,7 +585,7 @@ const Navbar = () => {
               <Link
                 to="/profile"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] hover:bg-white/[0.04] hover:text-[#E7A8BD]"
+                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
               >
                 <User size={19} />
                 Profile
@@ -593,11 +599,9 @@ const Navbar = () => {
         )}
       </header>
 
-      {/* ===================================================== */}
       {/* Mobile Bottom Navigation */}
-      {/* ===================================================== */}
 
-      <nav className="fixed right-4 bottom-4 left-4 z-50 flex h-[64px] items-center justify-around rounded-2xl border border-white/[0.08] bg-[#110E12]/95 px-2 shadow-[0_15px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl md:hidden">
+      <nav className="fixed right-4 bottom-4 left-4 z-50 flex h-16 items-center justify-around rounded-2xl border border-white/8 bg-[#110E12]/95 px-2 shadow-[0_15px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl md:hidden">
         {/* Home */}
         <Link
           to="/"
