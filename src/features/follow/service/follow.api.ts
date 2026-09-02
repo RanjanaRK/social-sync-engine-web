@@ -28,6 +28,14 @@ export const unfollowUser = async (
   return response.data;
 };
 
+export const removeFollower = async (
+  username: string,
+): Promise<FollowResponse> => {
+  const response = await followApiInstance.delete(`/followers/${username}`);
+
+  return response.data;
+};
+
 export const getFollowStatus = async (
   username: string,
 ): Promise<FollowStatusResponse> => {

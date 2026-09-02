@@ -1,115 +1,7 @@
-// import { ArrowLeft, Users } from "lucide-react";
-// import { useEffect, useState } from "react";
-// import { useNavigate, useParams, useLocation } from "react-router";
-
-// import type { User } from "../../auth/utils/authType";
-// import useFollow from "../hooks/useFollow";
-// import FollowUserCard from "../components/FollowUserCard";
-
-// const Follow = () => {
-//   const { username } = useParams();
-//   const location = useLocation();
-//   const navigate = useNavigate();
-
-//   const { handleGetFollowers, handleGetFollowing } = useFollow();
-
-//   const [users, setUsers] = useState<User[]>([]);
-//   const [loading, setLoading] = useState(true);
-
-//   const isFollowers = location.pathname.includes("/followers");
-
-//   useEffect(() => {
-//     if (!username) return;
-
-//     const fetchUsers = async () => {
-//       try {
-//         setLoading(true);
-
-//         const data = isFollowers
-//           ? await handleGetFollowers(username)
-//           : await handleGetFollowing(username);
-
-//         setUsers(data);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchUsers();
-//   }, [username, isFollowers]);
-
-//   const title = isFollowers ? "Followers" : "Following";
-
-//   return (
-//     <main className="min-h-screen px-4 pt-6 pb-24">
-//       <div className="mx-auto max-w-xl">
-//         {/* Header */}
-//         <div className="mb-5 flex items-center gap-3">
-//           <button
-//             type="button"
-//             onClick={() => navigate(-1)}
-//             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#BDB3B8] transition hover:bg-white/[0.07] hover:text-white"
-//           >
-//             <ArrowLeft size={19} />
-//           </button>
-
-//           <div>
-//             <h1 className="text-xl font-semibold text-[#F8F3F6]">{title}</h1>
-
-//             <p className="text-xs text-[#756B72]">@{username}</p>
-//           </div>
-//         </div>
-
-//         {/* Loading */}
-//         {loading ? (
-//           <div className="space-y-3">
-//             {[1, 2, 3, 4, 5].map((item) => (
-//               <div
-//                 key={item}
-//                 className="flex animate-pulse items-center gap-4 rounded-2xl bg-white/[0.025] p-4"
-//               >
-//                 <div className="h-12 w-12 rounded-full bg-white/5" />
-
-//                 <div className="flex-1 space-y-2">
-//                   <div className="h-4 w-32 rounded bg-white/5" />
-//                   <div className="h-3 w-48 rounded bg-white/[0.03]" />
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         ) : users.length > 0 ? (
-//           <div className="space-y-3">
-//             {users.map((user) => (
-//               <FollowUserCard key={user._id} user={user} />
-//             ))}
-//           </div>
-//         ) : (
-//           <div className="rounded-3xl border border-white/[0.06] bg-white/[0.025] px-6 py-14 text-center">
-//             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E7A8BD]/10 text-[#E7A8BD]">
-//               <Users size={24} />
-//             </div>
-
-//             <h2 className="mt-4 font-semibold text-[#F3EDF0]">
-//               {isFollowers ? "No followers yet" : "Not following anyone"}
-//             </h2>
-
-//             <p className="mt-2 text-sm text-[#756B72]">
-//               {isFollowers
-//                 ? "When people follow this account, they'll appear here."
-//                 : "Accounts this user follows will appear here."}
-//             </p>
-//           </div>
-//         )}
-//       </div>
-//     </main>
-//   );
-// };
-
-// export default Follow;
-
 import { Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
 import type { RootState } from "../../../app/app.store";
 import type { User } from "../../auth/utils/authType";
 import FollowUserCard from "../components/FollowUserCard";
@@ -120,8 +12,12 @@ type Tab = "followers" | "following";
 const FollowPage = () => {
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const { handleGetFollowers, handleGetFollowing } = useFollow();
-
+  const {
+    handleGetFollowers,
+    handleGetFollowing,
+    handleRemoveFollower,
+    handleUnfollowUser,
+  } = useFollow();
   const [activeTab, setActiveTab] = useState<Tab>("followers");
 
   const [followers, setFollowers] = useState<User[]>([]);
@@ -152,6 +48,34 @@ const FollowPage = () => {
 
     fetchFollowData();
   }, [user?.username]);
+
+  const handleRemove = async (username: string) => {
+    try {
+      const res = await handleRemoveFollower(username);
+
+      setFollowers((prev) =>
+        prev.filter((person) => person.username !== username),
+      );
+
+      toast.success(res.success);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const handleUnfollow = async (username: string) => {
+    try {
+      await handleUnfollowUser(username);
+
+      setFollowing((prev) =>
+        prev.filter((person) => person.username !== username),
+      );
+
+      toast.success(`Unfollowed ${username}`);
+    } catch {
+      toast.error("Failed to unfollow user");
+    }
+  };
 
   const activeUsers = activeTab === "followers" ? followers : following;
 
@@ -240,7 +164,16 @@ const FollowPage = () => {
         ) : activeUsers.length > 0 ? (
           <div className="space-y-3">
             {activeUsers.map((person) => (
-              <FollowUserCard key={person._id} user={person} />
+              <FollowUserCard
+                key={person._id}
+                user={person}
+                actionLabel={activeTab === "followers" ? "Remove" : "Following"}
+                onAction={
+                  activeTab === "followers"
+                    ? () => handleRemove(person.username)
+                    : () => handleUnfollow(person.username)
+                }
+              />
             ))}
           </div>
         ) : (

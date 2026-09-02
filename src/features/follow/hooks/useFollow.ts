@@ -6,6 +6,7 @@ import {
   getFollowers,
   getFollowing,
   getFollowStatus,
+  removeFollower,
   unfollowUser,
 } from "../service/follow.api";
 
@@ -19,7 +20,6 @@ const useFollow = () => {
   const dispatch = useDispatch();
 
   // FOLLOW
-
   const handleFollowUser = async (username: string) => {
     try {
       dispatch(setFollowLoading(true));
@@ -39,7 +39,6 @@ const useFollow = () => {
   };
 
   // UNFOLLOW
-
   const handleUnfollowUser = async (username: string) => {
     try {
       dispatch(setFollowLoading(true));
@@ -58,8 +57,20 @@ const useFollow = () => {
     }
   };
 
-  // FOLLOW STATUS
+  // REMOVE FOLLOWER
+  const handleRemoveFollower = async (username: string) => {
+    try {
+      dispatch(setFollowLoading(true));
 
+      const response = await removeFollower(username);
+
+      return response;
+    } finally {
+      dispatch(setFollowLoading(false));
+    }
+  };
+
+  // FOLLOW STATUS
   const handleGetFollowStatus = async (username: string) => {
     const response = await getFollowStatus(username);
 
@@ -69,7 +80,6 @@ const useFollow = () => {
   };
 
   // FOLLOW COUNTS
-
   const handleGetFollowCounts = async (username: string) => {
     const response = await getFollowCounts(username);
 
@@ -83,12 +93,14 @@ const useFollow = () => {
     return response;
   };
 
+  // FOLLOWERS
   const handleGetFollowers = async (username: string) => {
     const response = await getFollowers(username);
 
     return response.data;
   };
 
+  // FOLLOWING
   const handleGetFollowing = async (username: string) => {
     const response = await getFollowing(username);
 
@@ -98,6 +110,7 @@ const useFollow = () => {
   return {
     handleFollowUser,
     handleUnfollowUser,
+    handleRemoveFollower,
     handleGetFollowStatus,
     handleGetFollowCounts,
     handleGetFollowers,
