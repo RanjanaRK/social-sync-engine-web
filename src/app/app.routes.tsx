@@ -16,6 +16,8 @@ const PublicProfilePage = lazy(
   () => import("../features/profile/pages/PublicProfilePage"),
 );
 
+const Follow = lazy(() => import("../features/follow/pages/Follow"));
+
 const AppLayout = lazy(() => import("./AppLayout"));
 
 export const routes = createBrowserRouter([
@@ -68,6 +70,23 @@ export const routes = createBrowserRouter([
         element: (
           <Protected>
             <PublicProfilePage />,
+          </Protected>
+        ),
+      },
+      {
+        path: "/profile/:username/followers",
+        element: (
+          <Protected>
+            <Follow />
+          </Protected>
+        ),
+      },
+
+      {
+        path: "/follow",
+        element: (
+          <Protected>
+            <Follow />
           </Protected>
         ),
       },

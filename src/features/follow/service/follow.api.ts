@@ -4,6 +4,7 @@ import type {
   FollowCountsResponse,
   FollowResponse,
   FollowStatusResponse,
+  FollowUsersResponse,
 } from "../utils/types";
 
 const followApiInstance = axios.create({
@@ -39,6 +40,22 @@ export const getFollowCounts = async (
   username: string,
 ): Promise<FollowCountsResponse> => {
   const response = await followApiInstance.get(`/counts/${username}`);
+
+  return response.data;
+};
+
+export const getFollowers = async (
+  username: string,
+): Promise<FollowUsersResponse> => {
+  const response = await followApiInstance.get(`/followers/${username}`);
+
+  return response.data;
+};
+
+export const getFollowing = async (
+  username: string,
+): Promise<FollowUsersResponse> => {
+  const response = await followApiInstance.get(`/following/${username}`);
 
   return response.data;
 };

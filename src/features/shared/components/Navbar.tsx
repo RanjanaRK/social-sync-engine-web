@@ -400,7 +400,7 @@ const Navbar = () => {
       {/* ===================================================== */}
 
       <header className="fixed top-0 right-0 left-0 z-50 hidden px-4 pt-4 md:block">
-        <nav className="mx-auto flex h-[64px] max-w-6xl items-center justify-between rounded-2xl border border-white/[0.07] bg-[#110E12]/90 px-5 shadow-[0_12px_45px_rgba(0,0,0,0.25)] backdrop-blur-xl">
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between rounded-2xl border border-white/[0.07] bg-[#110E12]/90 px-5 shadow-[0_12px_45px_rgba(0,0,0,0.25)] backdrop-blur-xl">
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E7A8BD]/15 bg-[#E7A8BD]/[0.06] transition-all duration-200 group-hover:border-[#E7A8BD]/30 group-hover:bg-[#E7A8BD]/10">
@@ -435,7 +435,7 @@ const Navbar = () => {
 
             {/* Following */}
             <Link
-              to="/following"
+              to="/follow"
               className={navItemClass(isActive("/following"))}
               aria-label="Following"
             >

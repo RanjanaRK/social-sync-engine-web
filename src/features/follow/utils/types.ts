@@ -28,3 +28,10 @@ export interface FollowCountsResponse {
     following: number;
   };
 }
+
+import type { User } from "../../auth/utils/authType";
+
+export interface FollowUsersResponse {
+  success: boolean;
+  data: User[];
+}

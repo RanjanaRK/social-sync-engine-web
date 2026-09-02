@@ -1,46 +1,15 @@
-// import { useSelector } from "react-redux";
-// import type { RootState } from "../../../app/app.store";
-
-// const FollowStats = () => {
-//   const { followers, following } = useSelector(
-//     (state: RootState) => state.follow,
-//   );
-
-//   return (
-//     <div className="mt-5 flex items-center justify-center gap-8 md:justify-start">
-//       <div className="text-center md:text-left">
-//         <p className="text-lg font-bold text-[#F3EDF0]">
-//           {followers.toLocaleString()}
-//         </p>
-
-//         <p className="text-xs text-[#756B72]">
-//           {followers === 1 ? "Follower" : "Followers"}
-//         </p>
-//       </div>
-
-//       <div className="h-8 w-px bg-white/10" />
-
-//       <div className="text-center md:text-left">
-//         <p className="text-lg font-bold text-[#F3EDF0]">
-//           {following.toLocaleString()}
-//         </p>
-
-//         <p className="text-xs text-[#756B72]">Following</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FollowStats;
-
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../app/app.store";
+import { useNavigate } from "react-router";
 
 type Props = {
   postsCount: number;
+  username: string;
 };
 
-const FollowStats = ({ postsCount }: Props) => {
+const FollowStats = ({ postsCount, username }: Props) => {
+  const navigate = useNavigate();
+
   const { followers, following } = useSelector(
     (state: RootState) => state.follow,
   );
@@ -60,18 +29,38 @@ const FollowStats = ({ postsCount }: Props) => {
 
       {/* Followers */}
       <div>
-        <p className="font-bold text-[#F3EDF0]">{followers.toLocaleString()}</p>
+        <button
+          type="button"
+          onClick={() => navigate(`/profile/${username}/followers`)}
+          className="text-left"
+        >
+          <p className="font-bold text-[#F3EDF0]">
+            {followers.toLocaleString()}
+          </p>
 
-        <p className="text-xs text-[#756B72]">Followers</p>
+          <p className="text-xs text-[#756B72] transition hover:text-[#E7A8BD]">
+            Followers
+          </p>
+        </button>
       </div>
 
       <div className="h-7 w-px bg-white/10" />
 
       {/* Following */}
       <div>
-        <p className="font-bold text-[#F3EDF0]">{following.toLocaleString()}</p>
+        <button
+          type="button"
+          onClick={() => navigate(`/profile/${username}/following`)}
+          className="text-left"
+        >
+          <p className="font-bold text-[#F3EDF0]">
+            {following.toLocaleString()}
+          </p>
 
-        <p className="text-xs text-[#756B72]">Following</p>
+          <p className="text-xs text-[#756B72] transition hover:text-[#E7A8BD]">
+            Following
+          </p>
+        </button>
       </div>
     </div>
   );

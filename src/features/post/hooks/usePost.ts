@@ -6,7 +6,7 @@ import {
   getSinglePost,
   likePost,
 } from "../service/post.api";
-import { setPosts } from "../state/post.slice";
+import { setPostLoading, setPosts } from "../state/post.slice";
 import { removePost } from "../../profile/state/profile.slice";
 
 const usePost = () => {
@@ -19,11 +19,17 @@ const usePost = () => {
   };
 
   const handleGetAllPost = async () => {
-    const data = await getAllPosts();
+    try {
+      dispatch(setPostLoading(true));
 
-    dispatch(setPosts(data.data));
+      const response = await getAllPosts();
 
-    return data;
+      dispatch(setPosts(response.data));
+
+      return response;
+    } finally {
+      dispatch(setPostLoading(false));
+    }
   };
 
   const handleGetSinglePost = async (postId: string) => {

@@ -48,12 +48,12 @@ const PublicProfileHeader = ({
 
   //  Follow user
   const handleFollow = async () => {
-    await handleFollowUser(user.username);
+    await handleFollowUser(username);
   };
 
   //  Unfollow user
   const handleUnfollow = async () => {
-    await handleUnfollowUser(user.username);
+    await handleUnfollowUser(username);
   };
 
   return (
@@ -135,7 +135,7 @@ const PublicProfileHeader = ({
             )}
           </div>
 
-          <FollowStats postsCount={postsCount} />
+          <FollowStats postsCount={postsCount} username={username} />
         </div>
       </div>
     </section>

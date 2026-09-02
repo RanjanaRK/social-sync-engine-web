@@ -6,9 +6,10 @@ import PublicProfileHeader from "../components/PublicProfileHeader";
 import useProfile from "../hooks/useProfile";
 import usePost from "../../post/hooks/usePost";
 import { toast } from "sonner";
+import ProfileSkeleton from "../components/ProfileSkeleton";
 
 const Profile = () => {
-  const { user, posts, postsCount } = useSelector(
+  const { user, posts, postsCount, isLoading } = useSelector(
     (state: RootState) => state.profile,
   );
   const { handleDeletePost } = usePost();
@@ -19,8 +20,8 @@ const Profile = () => {
     handleGetCurrentProfile();
   }, []);
 
-  if (!user) {
-    return <div>Loading...</div>;
+  if (isLoading || !user) {
+    return <ProfileSkeleton />;
   }
 
   const handleDelete = async (postId: string) => {

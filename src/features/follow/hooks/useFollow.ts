@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import {
   followUser,
   getFollowCounts,
+  getFollowers,
+  getFollowing,
   getFollowStatus,
   unfollowUser,
 } from "../service/follow.api";
@@ -81,11 +83,25 @@ const useFollow = () => {
     return response;
   };
 
+  const handleGetFollowers = async (username: string) => {
+    const response = await getFollowers(username);
+
+    return response.data;
+  };
+
+  const handleGetFollowing = async (username: string) => {
+    const response = await getFollowing(username);
+
+    return response.data;
+  };
+
   return {
     handleFollowUser,
     handleUnfollowUser,
     handleGetFollowStatus,
     handleGetFollowCounts,
+    handleGetFollowers,
+    handleGetFollowing,
   };
 };
 
