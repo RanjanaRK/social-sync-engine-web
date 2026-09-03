@@ -51,7 +51,7 @@ const EditProfile = () => {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/[0.04] hover:text-[#F8F3F6]"
+          className="flex h-10 w-10 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/4 hover:text-[#F8F3F6]"
         >
           <ArrowLeft size={20} />
         </button>
@@ -68,7 +68,7 @@ const EditProfile = () => {
       {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-5 rounded-2xl border border-white/[0.06] bg-[#151116] p-5 sm:p-6"
+        className="space-y-5 rounded-2xl border border-white/6 bg-[#151116] p-5 sm:p-6"
       >
         {/* Username */}
         <div>
@@ -89,7 +89,7 @@ const EditProfile = () => {
               },
             })}
             placeholder="Enter username"
-            className="h-11 w-full rounded-xl border border-white/[0.08] bg-[#0F0B0E] px-4 text-sm text-[#F8F3F6] outline-none placeholder:text-[#625A60] focus:border-[#E7A8BD]/40"
+            className="h-11 w-full rounded-xl border border-white/8 bg-[#0F0B0E] px-4 text-sm text-[#F8F3F6] outline-none placeholder:text-[#625A60] focus:border-[#E7A8BD]/40"
           />
 
           {errors.username && (
@@ -114,7 +114,7 @@ const EditProfile = () => {
             })}
             rows={5}
             placeholder="Tell people about yourself..."
-            className="w-full resize-none rounded-xl border border-white/[0.08] bg-[#0F0B0E] px-4 py-3 text-sm leading-6 text-[#F8F3F6] outline-none placeholder:text-[#625A60] focus:border-[#E7A8BD]/40"
+            className="w-full resize-none rounded-xl border border-white/8 bg-[#0F0B0E] px-4 py-3 text-sm leading-6 text-[#F8F3F6] outline-none placeholder:text-[#625A60] focus:border-[#E7A8BD]/40"
           />
 
           {errors.bio && (

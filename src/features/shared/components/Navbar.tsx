@@ -1,5 +1,4 @@
 import {
-  Bell,
   Bookmark,
   Home,
   Menu,
@@ -34,10 +33,13 @@ const Navbar = () => {
         : "text-[#81777E] hover:bg-white/[0.04] hover:text-[#E8E0E4]"
     }`;
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
-      {/* Desktop Navbar */}
-
+      {/*  DESKTOP NAVBAR  */}
       <header className="fixed top-0 right-0 left-0 z-50 hidden px-4 pt-4 md:block">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between rounded-2xl border border-white/[0.07] bg-[#110E12]/90 px-5 shadow-[0_12px_45px_rgba(0,0,0,0.25)] backdrop-blur-xl">
           {/* Logo */}
@@ -57,7 +59,7 @@ const Navbar = () => {
             <SearchField />
           </div>
 
-          {/* Navigation */}
+          {/* Desktop Navigation */}
           <div className="flex items-center gap-1">
             {/* Home */}
             <Link
@@ -75,15 +77,12 @@ const Navbar = () => {
             {/* Following */}
             <Link
               to="/follow"
-              className={navItemClass(isActive("/following"))}
+              className={navItemClass(isActive("/follow"))}
               aria-label="Following"
             >
-              <Users
-                size={20}
-                strokeWidth={isActive("/following") ? 2.2 : 1.8}
-              />
+              <Users size={20} strokeWidth={isActive("/follow") ? 2.2 : 1.8} />
 
-              {isActive("/following") && (
+              {isActive("/follow") && (
                 <span className="absolute -bottom-1 h-1 w-1 rounded-full bg-[#E7A8BD]" />
               )}
             </Link>
@@ -97,11 +96,12 @@ const Navbar = () => {
               <Plus size={20} strokeWidth={2.2} />
             </Link>
 
-            {/* Notifications */}
+            {/* Saved Posts */}
+
             <Link
               to="/saved"
               className={navItemClass(isActive("/saved"))}
-              aria-label="saved"
+              aria-label="Saved Posts"
             >
               <Bookmark
                 size={20}
@@ -134,8 +134,7 @@ const Navbar = () => {
         </nav>
       </header>
 
-      {/* Mobile Top Navbar */}
-
+      {/*  MOBILE TOP NAVBAR  */}
       <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#0B090C]/95 backdrop-blur-xl md:hidden">
         <div className="flex h-15 items-center justify-between px-4">
           {/* Logo */}
@@ -154,12 +153,13 @@ const Navbar = () => {
           <div className="flex items-center gap-1">
             <Link
               to="/search"
-              className="hover:bg-white/4hover:text-[#E8E0E4] flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E]"
+              className="flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/4 hover:text-[#E8E0E4]"
             >
               <Search size={20} />
             </Link>
 
             <button
+              type="button"
               onClick={() => setIsOpen((prev) => !prev)}
               className="flex h-9 w-9 items-center justify-center rounded-xl text-[#81777E] transition hover:bg-white/4 hover:text-[#E8E0E4]"
               aria-label="Menu"
@@ -169,7 +169,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/*  MOBILE MENU  */}
         {isOpen && (
           <div className="border-t border-white/[0.07] bg-[#110E12] px-4 py-4">
             <div className="mb-4">
@@ -177,51 +177,73 @@ const Navbar = () => {
             </div>
 
             <div className="space-y-1">
+              {/* Home */}
               <Link
                 to="/"
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition ${
+                  isActive("/")
+                    ? "bg-[#E7A8BD]/10 text-[#E7A8BD]"
+                    : "text-[#B8AFB5] hover:bg-white/4 hover:text-[#E7A8BD]"
+                }`}
               >
                 <Home size={19} />
                 Home
               </Link>
 
+              {/* Following */}
               <Link
-                to="/following"
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
+                to="/follow"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition ${
+                  isActive("/follow")
+                    ? "bg-[#E7A8BD]/10 text-[#E7A8BD]"
+                    : "text-[#B8AFB5] hover:bg-white/4 hover:text-[#E7A8BD]"
+                }`}
               >
                 <Users size={19} />
                 Following
               </Link>
 
+              {/* Saved Posts */}
+              <Link
+                to="/saved"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition ${
+                  isActive("/saved")
+                    ? "bg-[#E7A8BD]/10 text-[#E7A8BD]"
+                    : "text-[#B8AFB5] hover:bg-white/4 hover:text-[#E7A8BD]"
+                }`}
+              >
+                <Bookmark size={19} />
+                Saved Posts
+              </Link>
+
+              {/* Create Post */}
               <Link
                 to="/create-post"
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
+                onClick={closeMobileMenu}
+                className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5] transition hover:bg-white/4 hover:text-[#E7A8BD]"
               >
                 <Plus size={19} />
                 Create post
               </Link>
 
-              <Link
-                to="/notifications"
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
-              >
-                <Bell size={19} />
-                Notifications
-              </Link>
-
+              {/* Profile */}
               <Link
                 to="/profile"
-                onClick={() => setIsOpen(false)}
-                className="hover:bg-white/4hover:text-[#E7A8BD] flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#B8AFB5]"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition ${
+                  isActive("/profile")
+                    ? "bg-[#E7A8BD]/10 text-[#E7A8BD]"
+                    : "text-[#B8AFB5] hover:bg-white/4 hover:text-[#E7A8BD]"
+                }`}
               >
                 <User size={19} />
                 Profile
               </Link>
 
+              {/* Logout */}
               <div className="mt-3 border-t border-white/[0.07] pt-3">
                 <LogoutButton />
               </div>
@@ -230,8 +252,7 @@ const Navbar = () => {
         )}
       </header>
 
-      {/* Mobile Bottom Navigation */}
-
+      {/*  MOBILE BOTTOM NAV  */}
       <nav className="fixed right-4 bottom-4 left-4 z-50 flex h-16 items-center justify-around rounded-2xl border border-white/8 bg-[#110E12]/95 px-2 shadow-[0_15px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl md:hidden">
         {/* Home */}
         <Link
@@ -245,9 +266,9 @@ const Navbar = () => {
 
         {/* Following */}
         <Link
-          to="/following"
+          to="/follow"
           className={`flex h-11 w-11 items-center justify-center rounded-xl transition ${
-            isActive("/following") ? "text-[#E7A8BD]" : "text-[#756B72]"
+            isActive("/follow") ? "text-[#E7A8BD]" : "text-[#756B72]"
           }`}
         >
           <Users size={21} />
@@ -261,14 +282,14 @@ const Navbar = () => {
           <Plus size={22} strokeWidth={2.3} />
         </Link>
 
-        {/* Notifications */}
+        {/* Saved */}
         <Link
-          to="/notifications"
+          to="/saved"
           className={`flex h-11 w-11 items-center justify-center rounded-xl transition ${
-            isActive("/notifications") ? "text-[#E7A8BD]" : "text-[#756B72]"
+            isActive("/saved") ? "text-[#E7A8BD]" : "text-[#756B72]"
           }`}
         >
-          <Bell size={21} />
+          <Bookmark size={21} />
         </Link>
 
         {/* Profile */}
