@@ -1,5 +1,7 @@
 import type { User } from "../../auth/utils/authType";
 
+export type ReactionType = "like" | "love" | "haha" | "wow" | "sad" | "angry";
+
 export interface PostImage {
   url: string;
   fileId: string;
@@ -10,14 +12,13 @@ export interface Post {
   _id: string;
   caption: string;
   postImage: PostImage[];
-
   likesCount: number;
+  isLiked: boolean;
+  userReaction: ReactionType | null;
+  isSaved: boolean;
   commentsCount: number;
-
   visibility: PostVisibility;
-
   user: User; // User ID
-
   createdAt: string;
   updatedAt: string;
 }

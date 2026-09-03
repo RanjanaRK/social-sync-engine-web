@@ -1,78 +1,8 @@
-// import { useEffect, useState } from "react";
-// import useProfile from "../../profile/hooks/useProfile";
-// import type { User } from "../../auth/utils/authType";
-// import { useNavigate } from "react-router";
-
-// const SearchField = () => {
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [results, setResults] = useState<User[]>([]);
-//   const { handleSearchProfile } = useProfile();
-
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (searchQuery.trim().length < 2) {
-//       setResults([]);
-//       return;
-//     }
-
-//     const timer = setTimeout(async () => {
-//       try {
-//         const data = await handleSearchProfile(searchQuery);
-//         setResults(data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     }, 500);
-
-//     return () => clearTimeout(timer);
-//   }, [searchQuery]);
-
-//   return (
-//     <>
-//       <input
-//         onChange={(e) => setSearchQuery(e.target.value)}
-//         type="text"
-//         placeholder="Search users..."
-//         className="w-80 rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-white backdrop-blur-md outline-none"
-//       />
-
-//       {results.length > 0 && (
-//         <div className="absolute top-full mt-2 w-full rounded-xl border border-white/10 bg-[#0c1727] shadow-lg">
-//           {results.map((user) => (
-//             <button
-//               key={user._id}
-//               onClick={() => {
-//                 navigate(`/profile/${user.username}`);
-//                 setResults([]);
-//                 setSearchQuery("");
-//               }}
-//               className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/10"
-//             >
-//               <img
-//                 src={user.profileImage}
-//                 alt={user.username}
-//                 className="h-10 w-10 rounded-full object-cover"
-//               />
-
-//               <div>
-//                 <p className="font-medium text-white">{user.username}</p>
-//               </div>
-//             </button>
-//           ))}
-//         </div>
-//       )}
-//     </>
-//   );
-// };
-
-// export default SearchField;
-
-import { Search, X, Loader2, UserRound } from "lucide-react";
+import { Loader2, Search, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import useProfile from "../../profile/hooks/useProfile";
-import type { User } from "../../auth/utils/authType";
 import { useNavigate } from "react-router";
+import type { User } from "../../auth/utils/authType";
+import useProfile from "../../profile/hooks/useProfile";
 
 const SearchField = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -129,7 +59,7 @@ const SearchField = () => {
         className={`group relative flex items-center rounded-2xl border bg-[#151116]/90 backdrop-blur-xl transition-all duration-200 ${
           searchQuery
             ? "border-[#E7A8BD]/25 shadow-[0_8px_30px_rgba(231,168,189,0.06)]"
-            : "border-white/[0.07] hover:border-white/[0.12]"
+            : "border-white/[0.07] hover:border-white/12"
         }`}
       >
         {/* Search Icon */}
@@ -165,7 +95,7 @@ const SearchField = () => {
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-3 flex h-7 w-7 items-center justify-center rounded-full text-[#625A60] transition hover:bg-white/[0.06] hover:text-[#C8BDC3]"
+            className="absolute right-3 flex h-7 w-7 items-center justify-center rounded-full text-[#625A60] transition hover:bg-white/6 hover:text-[#C8BDC3]"
             aria-label="Clear search"
           >
             <X size={15} />
@@ -177,7 +107,7 @@ const SearchField = () => {
       {showDropdown && (
         <div className="absolute top-[calc(100%+8px)] right-0 left-0 z-50 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#151116]/95 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
           {/* Dropdown Header */}
-          <div className="flex items-center justify-between border-b border-white/[0.05] px-4 py-3">
+          <div className="flex items-center justify-between border-b border-white/5 px-4 py-3">
             <div className="flex items-center gap-2">
               <Search size={13} className="text-[#E7A8BD]" />
 
@@ -211,7 +141,7 @@ const SearchField = () => {
                   key={user._id}
                   type="button"
                   onClick={() => handleSelectUser(user.username)}
-                  className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200 hover:bg-white/[0.045]"
+                  className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200 hover:bg-white/4.5"
                 >
                   {/* Avatar */}
                   <div className="relative shrink-0">
@@ -269,7 +199,7 @@ const SearchField = () => {
 
           {/* Footer */}
           {!isLoading && results.length > 0 && (
-            <div className="border-t border-white/[0.05] px-4 py-2.5">
+            <div className="border-t border-white/5 px-4 py-2.5">
               <p className="text-center text-[10px] text-[#514A4F]">
                 Select a person to view their profile
               </p>

@@ -1,5 +1,9 @@
 import axios from "axios";
-import type { PostListResponse, PostResponse } from "../utils/types";
+import type {
+  PostListResponse,
+  PostResponse,
+  ReactionType,
+} from "../utils/types";
 
 export const postApiInstance = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api/post`,
@@ -29,8 +33,20 @@ export const deletePost = async (postId: string): Promise<PostResponse> => {
   return response.data;
 };
 
-export const likePost = async (postId: string, emoji: string = "like") => {
+export const likePost = async (postId: string, emoji: ReactionType) => {
   const response = await postApiInstance.post(`/like/${postId}`, { emoji });
+
+  return response.data;
+};
+
+export const savePost = async (postId: string) => {
+  const response = await postApiInstance.post(`/saved/${postId}`);
+
+  return response.data;
+};
+
+export const getSavedPosts = async (): Promise<PostListResponse> => {
+  const response = await postApiInstance.get("/saved");
 
   return response.data;
 };

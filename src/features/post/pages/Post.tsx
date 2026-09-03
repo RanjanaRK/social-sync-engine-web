@@ -32,14 +32,16 @@ const Post = () => {
       <div className="space-y-5 md:space-y-6">
         {posts.map((post) => (
           <PostCard
-            key={post._id}
+            id={post._id}
             username={post.user.username}
             avatar={post.user.profileImage}
             caption={post.caption}
             likes={post.likesCount}
             comments={post.commentsCount}
             images={post.postImage}
-            id={post._id}
+            isLiked={post.isLiked}
+            userReaction={post.userReaction}
+            isSaved={post.isSaved}
           />
         ))}
       </div>

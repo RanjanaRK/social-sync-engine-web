@@ -1,58 +1,4 @@
-// import { ImagePlus } from "lucide-react";
-// import { useDropzone } from "react-dropzone";
-
-// type Props = {
-//   images: File[];
-//   onChange: (files: File[]) => void;
-// };
-
-// const ImageDropzone = ({ images, onChange }: Props) => {
-//   const { getRootProps, getInputProps } = useDropzone({
-//     accept: {
-//       "image/*": [],
-//     },
-//     multiple: true,
-//     maxFiles: 5,
-
-//     onDrop: (acceptedFiles) => {
-//       onChange(acceptedFiles);
-//     },
-//   });
-
-//   return (
-//     <div
-//       {...getRootProps()}
-//       className="cursor-pointer rounded-3xl border border-dashed border-white/20 bg-[#132238] p-6 transition hover:border-blue-400/40"
-//     >
-//       <input {...getInputProps()} />
-
-//       {images.length > 0 ? (
-//         <div className="grid grid-cols-2 gap-2">
-//           {images.map((image, index) => (
-//             <img
-//               key={index}
-//               src={URL.createObjectURL(image)}
-//               alt={`preview-${index}`}
-//               className="h-48 w-full rounded-2xl object-cover"
-//             />
-//           ))}
-//         </div>
-//       ) : (
-//         <div className="flex flex-col items-center gap-3 text-gray-400">
-//           <ImagePlus size={40} />
-
-//           <p>Drag & drop image here</p>
-
-//           <p className="text-sm">or click to select</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ImageDropzone;
-
-import { ImagePlus, X, UploadCloud } from "lucide-react";
+import { ImagePlus, UploadCloud, X } from "lucide-react";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -94,7 +40,7 @@ const ImageDropzone = ({ images, onChange }: Props) => {
           {images.map((image, index) => (
             <div
               key={`${image.name}-${index}`}
-              className="group relative aspect-square overflow-hidden rounded-2xl bg-[#0F0C10] ring-1 ring-white/[0.06]"
+              className="group relative aspect-square overflow-hidden rounded-2xl bg-[#0F0C10] ring-1 ring-white/6"
             >
               <img
                 src={URL.createObjectURL(image)}
@@ -145,10 +91,10 @@ const ImageDropzone = ({ images, onChange }: Props) => {
       {images.length === 0 && (
         <div
           {...getRootProps()}
-          className={`group flex min-h-[230px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed px-6 transition-all duration-300 ${
+          className={`group flex min-h-57.5 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed px-6 transition-all duration-300 ${
             isDragActive
               ? "border-[#E7A8BD]/60 bg-[#E7A8BD]/10"
-              : "border-white/10 bg-[#0F0C10] hover:border-[#E7A8BD]/30 hover:bg-[#E7A8BD]/[0.03]"
+              : "border-white/10 bg-[#0F0C10] hover:border-[#E7A8BD]/30 hover:bg-[#E7A8BD]/3"
           }`}
         >
           <input {...getInputProps()} />
@@ -157,7 +103,7 @@ const ImageDropzone = ({ images, onChange }: Props) => {
             className={`flex h-14 w-14 items-center justify-center rounded-2xl transition ${
               isDragActive
                 ? "bg-[#E7A8BD]/15 text-[#E7A8BD]"
-                : "bg-white/[0.04] text-[#756B72] group-hover:bg-[#E7A8BD]/10 group-hover:text-[#E7A8BD]"
+                : "bg-white/4 text-[#756B72] group-hover:bg-[#E7A8BD]/10 group-hover:text-[#E7A8BD]"
             }`}
           >
             <UploadCloud size={25} strokeWidth={1.6} />

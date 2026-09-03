@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
+import { removePost } from "../../profile/state/profile.slice";
 import {
   createPost,
   deletePost,
   getAllPosts,
+  getSavedPosts,
   getSinglePost,
   likePost,
+  savePost,
 } from "../service/post.api";
 import { setPostLoading, setPosts } from "../state/post.slice";
-import { removePost } from "../../profile/state/profile.slice";
+import type { ReactionType } from "../utils/types";
 
 const usePost = () => {
   const dispatch = useDispatch();
@@ -46,10 +49,38 @@ const usePost = () => {
     return data;
   };
 
-  const handleLikePost = async (postId: string, emoji: string = "like") => {
-    const data = await likePost(postId, emoji);
+  const handleLikePost = async (postId: string, emoji: ReactionType) => {
+    try {
+      const response = await likePost(postId, emoji);
 
-    return data;
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const handleSavePost = async (postId: string) => {
+    try {
+      const response = await savePost(postId);
+
+      return response;
+    } catch (error) {
+      console.error("Save post error:", error);
+      throw error;
+    }
+  };
+
+  const handleGetSavedPosts = async () => {
+    try {
+      const response = await getSavedPosts();
+
+      return response.data;
+    } catch (error) {
+      console.error("Get saved posts error:", error);
+
+      throw error;
+    }
   };
 
   return {
@@ -58,6 +89,8 @@ const usePost = () => {
     handleGetSinglePost,
     handleDeletePost,
     handleLikePost,
+    handleSavePost,
+    handleGetSavedPosts,
   };
 };
 
