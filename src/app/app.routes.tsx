@@ -16,6 +16,8 @@ const PublicProfilePage = lazy(
   () => import("../features/profile/pages/PublicProfilePage"),
 );
 
+const EditProfile = lazy(() => import("../features/profile/pages/EditProfile"));
+
 const Follow = lazy(() => import("../features/follow/pages/Follow"));
 
 const SavedPost = lazy(() => import("../features/post/pages/SavedPost"));
@@ -66,6 +68,10 @@ export const routes = createBrowserRouter([
             <Profile />,
           </Protected>
         ),
+      },
+      {
+        path: "/profile/edit",
+        element: <EditProfile />,
       },
       {
         path: "/profile/:username",

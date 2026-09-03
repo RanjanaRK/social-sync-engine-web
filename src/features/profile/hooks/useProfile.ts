@@ -58,6 +58,7 @@ import {
   getPublicProfile,
   searchUser,
   updateProfileImage,
+  updateUser,
 } from "../service/profile.api";
 
 import {
@@ -108,6 +109,17 @@ const useProfile = () => {
     return res;
   };
 
+  const handleUpdateUser = async (data: { username: string; bio: string }) => {
+    try {
+      const response = await updateUser(data);
+
+      return response;
+    } catch (error) {
+      console.error("Update profile error:", error);
+      throw error;
+    }
+  };
+
   // Search users
   const handleSearchProfile = async (username: string) => {
     const res = await searchUser(username);
@@ -119,6 +131,7 @@ const useProfile = () => {
     handleGetProfile,
     handleGetCurrentProfile,
     handleUpdateProfileImage,
+    handleUpdateUser,
     handleSearchProfile,
   };
 };

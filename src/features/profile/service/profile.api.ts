@@ -29,6 +29,12 @@ export const updateProfileImage = async (file: File) => {
   return res.data;
 };
 
+export const updateUser = async (data: { username: string; bio: string }) => {
+  const response = await profileApiInstance.patch("/profile/update/info", data);
+
+  return response.data;
+};
+
 export const searchUser = async (username: string): Promise<SearchResponse> => {
   const response = await profileApiInstance.get("/all", {
     params: {

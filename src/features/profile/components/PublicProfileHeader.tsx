@@ -6,6 +6,7 @@ import FollowButton from "../../follow/components/FollowButton";
 import FollowStats from "../../follow/components/FollowStats";
 import useFollow from "../../follow/hooks/useFollow";
 import useProfile from "../hooks/useProfile";
+import { useNavigate } from "react-router";
 
 type Props = {
   user: User;
@@ -25,6 +26,8 @@ const PublicProfileHeader = ({
   const { handleFollowUser, handleUnfollowUser } = useFollow();
 
   const [preview, setPreview] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const onDrop = async (files: File[]) => {
     const file = files[0];
@@ -123,6 +126,7 @@ const PublicProfileHeader = ({
             {isCurrentUser ? (
               <button
                 type="button"
+                onClick={() => navigate("/profile/edit")}
                 className="rounded-2xl bg-[#E7A8BD] px-5 py-2.5 font-semibold text-[#170F13] transition hover:bg-[#dda0b6]"
               >
                 Edit Profile

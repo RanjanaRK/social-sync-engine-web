@@ -220,6 +220,7 @@ import { Link } from "react-router";
 import usePost from "../hooks/usePost";
 import PostCarousel from "./PostCarousel";
 import ReactionPicker from "./ReactionPicker";
+import { toast } from "sonner";
 
 type ReactionType = "like" | "love" | "haha" | "wow" | "sad" | "angry";
 
@@ -299,8 +300,10 @@ const PostCard = ({
       }
 
       setSaved(response.isSaved);
-    } catch (error) {
+      toast.success(response.message);
+    } catch (error: any) {
       console.error("Save post error:", error);
+      toast.error(error.response?.data?.message ?? "Something went wrong");
     }
   };
 
